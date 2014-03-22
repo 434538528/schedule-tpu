@@ -11,36 +11,36 @@ import android.widget.ListView;
  */
 public class LessonsPagerAdapter extends PagerAdapter {
 
-    private Context context;
+	private Context context;
 
-    public LessonsPagerAdapter(Context context) {
-        this.context = context;
-    }
+	public LessonsPagerAdapter(Context context) {
+		this.context = context;
+	}
 
-    @Override
-    public Object instantiateItem(ViewGroup container, int position) {
-        ListView view = new ListView(context);
-        container.addView(view);
-        return view;
-    }
+	@Override
+	public Object instantiateItem(ViewGroup container, int position) {
+		ListView view = new ListView(context);
+		container.addView(view);
+		return view;
+	}
 
-    @Override
-    public void destroyItem(ViewGroup container, int position, Object object) {
-        container.removeView((View)object);
-    }
+	@Override
+	public void destroyItem(ViewGroup container, int position, Object object) {
+		container.removeView((View) object);
+	}
 
-    @Override
-    public int getCount() {
-        return 6;
-    }
+	@Override
+	public int getCount() {
+		return 6;
+	}
 
-    @Override
-    public CharSequence getPageTitle(int position) {
-        return "Понедельник";
-    }
+	@Override
+	public CharSequence getPageTitle(int position) {
+		return "Понедельник";
+	}
 
-    @Override
-    public boolean isViewFromObject(View view, Object object) {
-        return view.equals(object);
-    }
+	@Override
+	public boolean isViewFromObject(View view, Object object) {
+		return view.equals(object);
+	}
 }

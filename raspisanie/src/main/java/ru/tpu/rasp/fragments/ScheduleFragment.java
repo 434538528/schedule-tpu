@@ -17,39 +17,39 @@ import ru.tpu.rasp.adapters.LessonsPagerAdapter;
  * Created by Andrey on 16.03.14.
  */
 public class ScheduleFragment extends Fragment {
-    public static ScheduleFragment newInstance(boolean isBroken, boolean isEven, int dayOfWeek) {
-        ScheduleFragment scheduleFragment = new ScheduleFragment();
-        Bundle bundle = new Bundle();
-        bundle.putBoolean("isBroken", isBroken);
-        bundle.putBoolean("isEven", isEven);
-        bundle.putInt("dayOfWeek", dayOfWeek);
-        scheduleFragment.setArguments(bundle);
-        return scheduleFragment;
-    }
+	public static ScheduleFragment newInstance(boolean isBroken, boolean isEven, int dayOfWeek) {
+		ScheduleFragment scheduleFragment = new ScheduleFragment();
+		Bundle bundle = new Bundle();
+		bundle.putBoolean("isBroken", isBroken);
+		bundle.putBoolean("isEven", isEven);
+		bundle.putInt("dayOfWeek", dayOfWeek);
+		scheduleFragment.setArguments(bundle);
+		return scheduleFragment;
+	}
 
-    private Context context;
-    private View throbber;
+	private Context context;
+	private View throbber;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setRetainInstance(true);
-    }
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setRetainInstance(true);
+	}
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        context = inflater.getContext();
-        View v = inflater.inflate(R.layout.fragment_schedule, container, false);
-        assert v != null;
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		context = inflater.getContext();
+		View v = inflater.inflate(R.layout.fragment_schedule, container, false);
+		assert v != null;
 
-        PagerSlidingTabStrip weeksTabs = (PagerSlidingTabStrip) v.findViewById(R.id.weeks_tabs);
-        ViewPager viewPager = (ViewPager) v.findViewById(R.id.lessons_pager);
-        throbber = v.findViewById(R.id.throbber);
+		PagerSlidingTabStrip weeksTabs = (PagerSlidingTabStrip) v.findViewById(R.id.weeks_tabs);
+		ViewPager viewPager = (ViewPager) v.findViewById(R.id.lessons_pager);
+		throbber = v.findViewById(R.id.throbber);
 
-        viewPager.setAdapter(new LessonsPagerAdapter(context));
-        weeksTabs.setViewPager(viewPager);
+		viewPager.setAdapter(new LessonsPagerAdapter(context));
+		weeksTabs.setViewPager(viewPager);
 
-        throbber.setVisibility(View.INVISIBLE);
-        return v;
-    }
+		throbber.setVisibility(View.INVISIBLE);
+		return v;
+	}
 }

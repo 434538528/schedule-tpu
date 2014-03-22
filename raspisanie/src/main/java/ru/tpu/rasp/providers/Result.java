@@ -5,24 +5,24 @@ package ru.tpu.rasp.providers;
  */
 public class Result<T> {
 
-    private T data;
-    private Exception e;
+	private T data;
+	private Exception e;
 
-    public Result(Processor<T> processor) {
-        try {
-            this.data = processor.process();
-        } catch (Exception e) {
-            this.e = e;
-        }
-    }
+	public Result(Processor<T> processor) {
+		try {
+			this.data = processor.process();
+		} catch (Exception e) {
+			this.e = e;
+		}
+	}
 
-    public T get() throws Exception {
-        if (e != null)
-            throw e;
-        return data;
-    }
+	public T get() throws Exception {
+		if (e != null)
+			throw e;
+		return data;
+	}
 
-    public interface Processor<T> {
-        T process() throws Exception;
-    }
+	public interface Processor<T> {
+		T process() throws Exception;
+	}
 }

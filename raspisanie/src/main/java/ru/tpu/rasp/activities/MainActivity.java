@@ -1,10 +1,14 @@
 package ru.tpu.rasp.activities;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.internal.view.SupportMenuItem;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -80,6 +84,10 @@ public class MainActivity extends ActionBarActivity
 			// decide what to show in the action bar.
 			getMenuInflater().inflate(R.menu.main, menu);
 			restoreActionBar();
+			SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+			SupportMenuItem searchMenuItem = ((SupportMenuItem) menu.findItem(R.id.action_search));
+			SearchView searchView = (SearchView) searchMenuItem.getActionView();
+			searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
 			return true;
 		}
 		return super.onCreateOptionsMenu(menu);

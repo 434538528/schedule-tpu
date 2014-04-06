@@ -1,18 +1,17 @@
 package ru.tpu.rasp.activities;
 
-import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.internal.view.SupportMenuItem;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import ru.tpu.rasp.R;
+import ru.tpu.rasp.app.App;
 import ru.tpu.rasp.fragments.NavigationDrawerFragment;
 import ru.tpu.rasp.fragments.ScheduleFragment;
 
@@ -20,29 +19,36 @@ import ru.tpu.rasp.fragments.ScheduleFragment;
 public class MainActivity extends ActionBarActivity
 		implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
-	/**
-	 * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
-	 */
-	private NavigationDrawerFragment mNavigationDrawerFragment;
+	public static Intent newIntent(Context context) {
+		Intent intent = new Intent(context, MainActivity.class);
+		return intent;
+	}
 
-	/**
-	 * Used to store the last screen title. For use in {@link #restoreActionBar()}.
-	 */
-	private CharSequence mTitle;
+	private App mApp;
+	private NavigationDrawerFragment mNavigationDrawerFragment;
+	private String mScheduleToken;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+		mApp = ((App) getApplication());
+
+		mScheduleToken = mApp.getConfig().getScheduleToken();
+		if (mScheduleToken == null) {
+			startActivity(SearchActivity.newIntent(this));
+			finish();
+		}
+
 		mNavigationDrawerFragment = (NavigationDrawerFragment)
 				getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
-		mTitle = getTitle();
 
 		// Set up the drawer.
 		mNavigationDrawerFragment.setUp(
 				R.id.navigation_drawer,
 				(DrawerLayout) findViewById(R.id.drawer_layout));
+
 	}
 
 	@Override
@@ -54,27 +60,12 @@ public class MainActivity extends ActionBarActivity
 				.commit();
 	}
 
-	public void onSectionAttached(int number) {
-		switch (number) {
-			case 1:
-				mTitle = getString(R.string.title_section1);
-				break;
-			case 2:
-				mTitle = getString(R.string.title_section2);
-				break;
-			case 3:
-				mTitle = getString(R.string.title_section3);
-				break;
-		}
-	}
-
 	public void restoreActionBar() {
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 		actionBar.setDisplayShowTitleEnabled(true);
-		actionBar.setTitle(mTitle);
+		actionBar.setTitle(mScheduleToken);
 	}
-
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -84,10 +75,6 @@ public class MainActivity extends ActionBarActivity
 			// decide what to show in the action bar.
 			getMenuInflater().inflate(R.menu.main, menu);
 			restoreActionBar();
-			SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-			SupportMenuItem searchMenuItem = ((SupportMenuItem) menu.findItem(R.id.action_search));
-			SearchView searchView = (SearchView) searchMenuItem.getActionView();
-			searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
 			return true;
 		}
 		return super.onCreateOptionsMenu(menu);

@@ -21,11 +21,11 @@ public class ScheduleParser extends TpuGrabberParser<Schedule> {
 		resultJSON = resultJSON.getJSONObject("schedule");
 		int type = resultJSON.getInt("type");
 
-		WeekSchedule<Lesson> oddWeekBeforeBreaking = parseWeekSchedule(resultJSON.getJSONObject("before").getJSONArray("uneven"), type);
-		WeekSchedule<Lesson> evenWeekBeforeBreaking = parseWeekSchedule(resultJSON.getJSONObject("before").getJSONArray("even"), type);
-		WeekSchedule<Lesson> oddWeekAfterBreaking = parseWeekSchedule(resultJSON.getJSONObject("after").getJSONArray("uneven"), type);
-		WeekSchedule<Lesson> evenWeekAfterBreaking = parseWeekSchedule(resultJSON.getJSONObject("after").getJSONArray("even"), type);
-		return new Schedule.Builder<Lesson>(type)
+		WeekSchedule oddWeekBeforeBreaking = parseWeekSchedule(resultJSON.getJSONObject("before").getJSONArray("uneven"), type);
+		WeekSchedule evenWeekBeforeBreaking = parseWeekSchedule(resultJSON.getJSONObject("before").getJSONArray("even"), type);
+		WeekSchedule oddWeekAfterBreaking = parseWeekSchedule(resultJSON.getJSONObject("after").getJSONArray("uneven"), type);
+		WeekSchedule evenWeekAfterBreaking = parseWeekSchedule(resultJSON.getJSONObject("after").getJSONArray("even"), type);
+		return new Schedule.Builder(type)
 				.setOddWeekBeforeBreaking(oddWeekBeforeBreaking)
 				.setEvenWeekBeforeBreaking(evenWeekBeforeBreaking)
 				.setOddWeekAfterBreaking(oddWeekAfterBreaking)
@@ -33,10 +33,10 @@ public class ScheduleParser extends TpuGrabberParser<Schedule> {
 				.build();
 	}
 
-	private WeekSchedule<Lesson> parseWeekSchedule(JSONArray weekArray, int type) throws JSONException {
-		return new WeekSchedule.Builder<Lesson>()
+	private WeekSchedule parseWeekSchedule(JSONArray weekArray, int type) throws JSONException {
+		return new WeekSchedule.Builder()
 				.setMondayLessons(parseLessons(weekArray.getJSONArray(0), type))
-				.setThuesdayLessons(parseLessons(weekArray.getJSONArray(1), type))
+				.setTuesdayLessons(parseLessons(weekArray.getJSONArray(1), type))
 				.setWednesdayLessons(parseLessons(weekArray.getJSONArray(2), type))
 				.setThursdayLessons(parseLessons(weekArray.getJSONArray(3), type))
 				.setFridayLessons(parseLessons(weekArray.getJSONArray(4), type))

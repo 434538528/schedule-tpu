@@ -6,100 +6,80 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Created by Andrey on 16.03.14.
+ * Расписание на неделю
  */
-public class WeekSchedule<T extends Lesson> {
+public class WeekSchedule {
 
-	private static final int MONDAY = 0;
-	private static final int TUESDAY = 1;
-	private static final int WEDNESDAY = 2;
-	private static final int THURSDAY = 3;
-	private static final int FRIDAY = 4;
-	private static final int SATURDAY = 5;
+	public static final int MONDAY = 0;
+	public static final int TUESDAY = 1;
+	public static final int WEDNESDAY = 2;
+	public static final int THURSDAY = 3;
+	public static final int FRIDAY = 4;
+	public static final int SATURDAY = 5;
 
-	private final SparseArray<List<T>> lessons;
+	private final SparseArray<List<Lesson>> lessons;
 
-	public List<T> getMondayLessons() {
-		return lessons.get(MONDAY);
+	public List<Lesson> getDayLessons(int day) {
+		return lessons.get(day);
 	}
 
-	public List<T> getTuesdayLessons() {
-		return lessons.get(TUESDAY);
-	}
-
-	public List<T> getWednesdayLessons() {
-		return lessons.get(WEDNESDAY);
-	}
-
-	public List<T> getThursdayLessons() {
-		return lessons.get(THURSDAY);
-	}
-
-	public List<T> getFridayLessons() {
-		return lessons.get(FRIDAY);
-	}
-
-	public List<T> getSaturdayLessons() {
-		return lessons.get(SATURDAY);
-	}
-
-	private WeekSchedule(SparseArray<List<T>> lessons) {
+	private WeekSchedule(SparseArray<List<Lesson>> lessons) {
 		this.lessons = lessons;
 	}
 
-	public static class Builder<T extends Lesson> {
-		private SparseArray<List<T>> lessons = new SparseArray<List<T>>(6);
+	public static class Builder {
+		private SparseArray<List<Lesson>> lessons = new SparseArray<List<Lesson>>(6);
 
-		public Builder<T> setMondayLessons(List<T> lessons) {
+		public Builder setMondayLessons(List<Lesson> lessons) {
 			this.lessons.put(MONDAY, lessons);
 			return this;
 		}
 
-		public Builder<T> setThuesdayLessons(List<T> lessons) {
+		public Builder setTuesdayLessons(List<Lesson> lessons) {
 			this.lessons.put(TUESDAY, lessons);
 			return this;
 		}
 
-		public Builder<T> setWednesdayLessons(List<T> lessons) {
+		public Builder setWednesdayLessons(List<Lesson> lessons) {
 			this.lessons.put(WEDNESDAY, lessons);
 			return this;
 		}
 
-		public Builder<T> setThursdayLessons(List<T> lessons) {
+		public Builder setThursdayLessons(List<Lesson> lessons) {
 			this.lessons.put(THURSDAY, lessons);
 			return this;
 		}
 
-		public Builder<T> setFridayLessons(List<T> lessons) {
+		public Builder setFridayLessons(List<Lesson> lessons) {
 			this.lessons.put(FRIDAY, lessons);
 			return this;
 		}
 
-		public Builder<T> setSaturdayLessons(List<T> lessons) {
+		public Builder setSaturdayLessons(List<Lesson> lessons) {
 			this.lessons.put(SATURDAY, lessons);
 			return this;
 		}
 
-		public WeekSchedule<T> build() {
+		public WeekSchedule build() {
 			if (lessons.indexOfKey(MONDAY) < 0) {
-				lessons.put(MONDAY, Collections.<T>emptyList());
+				lessons.put(MONDAY, Collections.<Lesson>emptyList());
 			}
 			if (lessons.indexOfKey(TUESDAY) < 0) {
-				lessons.put(MONDAY, Collections.<T>emptyList());
+				lessons.put(MONDAY, Collections.<Lesson>emptyList());
 			}
 			if (lessons.indexOfKey(WEDNESDAY) < 0) {
-				lessons.put(MONDAY, Collections.<T>emptyList());
+				lessons.put(MONDAY, Collections.<Lesson>emptyList());
 			}
 			if (lessons.indexOfKey(THURSDAY) < 0) {
-				lessons.put(MONDAY, Collections.<T>emptyList());
+				lessons.put(MONDAY, Collections.<Lesson>emptyList());
 			}
 			if (lessons.indexOfKey(FRIDAY) < 0) {
-				lessons.put(MONDAY, Collections.<T>emptyList());
+				lessons.put(MONDAY, Collections.<Lesson>emptyList());
 			}
 			if (lessons.indexOfKey(SATURDAY) < 0) {
-				lessons.put(MONDAY, Collections.<T>emptyList());
+				lessons.put(MONDAY, Collections.<Lesson>emptyList());
 			}
-			return new WeekSchedule<T>(lessons);
+			return new WeekSchedule(lessons);
 		}
 	}
 }

@@ -37,6 +37,7 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
 	private Context mContext;
 	private View mThrobber;
 	private String mToken;
+	private LessonsPagerAdapter mLessonsPagerAdapter;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -55,7 +56,8 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
 		ViewPager viewPager = (ViewPager) v.findViewById(R.id.lessons_pager);
 		mThrobber = v.findViewById(R.id.throbber);
 
-		viewPager.setAdapter(new LessonsPagerAdapter(mContext));
+		mLessonsPagerAdapter = new LessonsPagerAdapter(mContext);
+		viewPager.setAdapter(mLessonsPagerAdapter);
 		weeksTabs.setViewPager(viewPager);
 
 		mThrobber.setVisibility(View.INVISIBLE);
@@ -71,7 +73,7 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
 	@Override
 	public void onLoadFinished(Loader<Result<Schedule>> loader, Result<Schedule> data) {
 		try {
-			Log.d("aaa", data.get().getType() + "");
+			mLessonsPagerAdapter.setSchedule(data.get().getWeek(Schedule.EVEN_AFTER_BREAKING));
 		} catch (Exception e) {
 			Log.e("aaa", "beda", e);
 		}

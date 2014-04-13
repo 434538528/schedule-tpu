@@ -14,4 +14,12 @@
 	<string name="action_search">Поиск</string>
 	<string name="search_hint">Поиск расписания</string>
 
+	<string-array name="daysOfWeek">
+		<item>ПН</item>
+		<item>ВТ</item>
+		<item>СР</item>
+		<item>ЧТ</item>
+		<item>ПТ</item>
+		<item>СБ</item>
+	</string-array>
 </resources>

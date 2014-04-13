@@ -38,6 +38,7 @@ public class MainActivity extends ActionBarActivity
 			startActivity(SearchActivity.newIntent(this));
 			finish();
 		}
+
 		setContentView(R.layout.activity_main);
 
 		mNavigationDrawerFragment = (NavigationDrawerFragment)
@@ -52,7 +53,6 @@ public class MainActivity extends ActionBarActivity
 
 	@Override
 	public void onNavigationDrawerItemSelected(int position) {
-		// update the main content by replacing fragments
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		fragmentManager.beginTransaction()
 				.replace(R.id.container, WeekScheduleFragment.newInstance(mScheduleToken, false, false, 0))
@@ -63,15 +63,12 @@ public class MainActivity extends ActionBarActivity
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 		actionBar.setDisplayShowTitleEnabled(true);
-		actionBar.setTitle(mScheduleToken);
+		actionBar.setTitle(mScheduleToken.substring(0, mScheduleToken.indexOf('/')));
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		if (!mNavigationDrawerFragment.isDrawerOpen()) {
-			// Only show items in the action bar relevant to this screen
-			// if the drawer is not showing. Otherwise, let the drawer
-			// decide what to show in the action bar.
 			getMenuInflater().inflate(R.menu.main, menu);
 			restoreActionBar();
 			return true;
@@ -81,18 +78,19 @@ public class MainActivity extends ActionBarActivity
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_search){
+		if (id == R.id.action_search) {
 			startActivity(SearchActivity.newIntent(this));
 			return true;
 		}
-		if (id == R.id.action_settings) {
-			return true;
+		if (id == R.id.action_refresh) {
+			getWeekScheduleFragment().reload();
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	public WeekScheduleFragment getWeekScheduleFragment() {
+		return (WeekScheduleFragment) getSupportFragmentManager().findFragmentById(R.id.container);
 	}
 
 }

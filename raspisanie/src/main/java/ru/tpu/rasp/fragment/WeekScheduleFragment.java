@@ -59,6 +59,13 @@ public class WeekScheduleFragment extends Fragment implements LoaderManager.Load
 		ViewPager viewPager = (ViewPager) v.findViewById(R.id.lessons_pager);
 		mLoadingView = (LoadingView) v.findViewById(R.id.loading_view);
 
+		mLoadingView.setOnRetryListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				reload();
+			}
+		});
+
 		mLessonsPagerAdapter = new LessonsPagerAdapter(mContext);
 		viewPager.setAdapter(mLessonsPagerAdapter);
 		weeksTabs.setViewPager(viewPager);
@@ -86,6 +93,9 @@ public class WeekScheduleFragment extends Fragment implements LoaderManager.Load
 
 	@Override
 	public void onLoaderReset(Loader<Result<Schedule>> loader) {
+	}
 
+	public void reload() {
+		getLoaderManager().restartLoader(0, null, this);
 	}
 }

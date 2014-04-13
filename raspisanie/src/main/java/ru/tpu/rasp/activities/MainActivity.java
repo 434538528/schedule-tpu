@@ -31,8 +31,6 @@ public class MainActivity extends ActionBarActivity
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-
 		mApp = ((App) getApplication());
 
 		mScheduleToken = mApp.getConfig().getScheduleToken();
@@ -40,6 +38,7 @@ public class MainActivity extends ActionBarActivity
 			startActivity(SearchActivity.newIntent(this));
 			finish();
 		}
+		setContentView(R.layout.activity_main);
 
 		mNavigationDrawerFragment = (NavigationDrawerFragment)
 				getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
@@ -56,7 +55,7 @@ public class MainActivity extends ActionBarActivity
 		// update the main content by replacing fragments
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		fragmentManager.beginTransaction()
-				.replace(R.id.container, ScheduleFragment.newInstance(false, false, 0))
+				.replace(R.id.container, ScheduleFragment.newInstance(mScheduleToken, false, false, 0))
 				.commit();
 	}
 

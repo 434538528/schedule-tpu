@@ -13,30 +13,41 @@ public class Schedule<T extends Lesson> {
 	private static final int ODD_AFTER_BREAKING = 3;
 
 	private SparseArray<WeekSchedule<T>> weeks;
+	private final int type;
 
-	private Schedule(SparseArray<WeekSchedule<T>> weeks) {
+	private Schedule(int type, SparseArray<WeekSchedule<T>> weeks) {
+		this.type = type;
 		this.weeks = weeks;
 	}
 
-	public static class Builder<T extends Lesson> {
-		private SparseArray<WeekSchedule<T>> weeks = new SparseArray<WeekSchedule<T>>(4);
+	public int getType(){
+		return type;
+	}
 
-		public Builder setEvenWeekBeforeBreaking(WeekSchedule<T> weekSchedule) {
+	public static class Builder<T extends Lesson> {
+		private final SparseArray<WeekSchedule<T>> weeks = new SparseArray<WeekSchedule<T>>(4);
+		private final int type;
+
+		public Builder(int type){
+			this.type = type;
+		}
+
+		public Builder<T> setEvenWeekBeforeBreaking(WeekSchedule<T> weekSchedule) {
 			weeks.put(EVEN_BEFORE_BREAKING, weekSchedule);
 			return this;
 		}
 
-		public Builder setOddWeekBeforeBreaking(WeekSchedule<T> weekSchedule) {
+		public Builder<T> setOddWeekBeforeBreaking(WeekSchedule<T> weekSchedule) {
 			weeks.put(ODD_BEFORE_BREAKING, weekSchedule);
 			return this;
 		}
 
-		public Builder setEvenWeekAfterBreaking(WeekSchedule<T> weekSchedule) {
+		public Builder<T> setEvenWeekAfterBreaking(WeekSchedule<T> weekSchedule) {
 			weeks.put(EVEN_AFTER_BREAKING, weekSchedule);
 			return this;
 		}
 
-		public Builder setOddWeekAfterBreaking(WeekSchedule<T> weekSchedule) {
+		public Builder<T> setOddWeekAfterBreaking(WeekSchedule<T> weekSchedule) {
 			weeks.put(ODD_AFTER_BREAKING, weekSchedule);
 			return this;
 		}
@@ -54,7 +65,7 @@ public class Schedule<T extends Lesson> {
 			if (weeks.indexOfKey(ODD_AFTER_BREAKING) < 0) {
 				weeks.put(ODD_AFTER_BREAKING, new WeekSchedule.Builder<T>().build());
 			}
-			return new Schedule<T>(weeks);
+			return new Schedule<T>(type, weeks);
 		}
 	}
 }

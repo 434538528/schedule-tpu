@@ -50,32 +50,32 @@ public class WeekSchedule<T extends Lesson> {
 	public static class Builder<T extends Lesson> {
 		private SparseArray<List<T>> lessons = new SparseArray<List<T>>(6);
 
-		public Builder setMondayLessons(List<T> lessons) {
+		public Builder<T> setMondayLessons(List<T> lessons) {
 			this.lessons.put(MONDAY, lessons);
 			return this;
 		}
 
-		public Builder setThuesdayLessons(List<T> lessons) {
+		public Builder<T> setThuesdayLessons(List<T> lessons) {
 			this.lessons.put(TUESDAY, lessons);
 			return this;
 		}
 
-		public Builder setWednesdayLessons(List<T> lessons) {
+		public Builder<T> setWednesdayLessons(List<T> lessons) {
 			this.lessons.put(WEDNESDAY, lessons);
 			return this;
 		}
 
-		public Builder setThursdayLessons(List<T> lessons) {
+		public Builder<T> setThursdayLessons(List<T> lessons) {
 			this.lessons.put(THURSDAY, lessons);
 			return this;
 		}
 
-		public Builder setFridayLessons(List<T> lessons) {
+		public Builder<T> setFridayLessons(List<T> lessons) {
 			this.lessons.put(FRIDAY, lessons);
 			return this;
 		}
 
-		public Builder setSaturdayLessons(List<T> lessons) {
+		public Builder<T> setSaturdayLessons(List<T> lessons) {
 			this.lessons.put(SATURDAY, lessons);
 			return this;
 		}

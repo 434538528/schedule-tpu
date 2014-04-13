@@ -9,8 +9,8 @@ public class TeacherLesson extends Lesson {
 	public final String room;
 	public final List<String> groups;
 
-	public TeacherLesson(String startTime, String endTime, String subject, String type, String room, List<String> groups) {
-		super(startTime, endTime, subject, type);
+	public TeacherLesson(String startTime, String subject, String type, String room, List<String> groups) {
+		super(startTime, subject, type);
 		this.room = room;
 		this.groups = groups;
 	}

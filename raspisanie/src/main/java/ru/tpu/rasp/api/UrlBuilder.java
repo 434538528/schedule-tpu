@@ -1,5 +1,9 @@
 package ru.tpu.rasp.api;
 
+import android.util.Log;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,13 +30,16 @@ public class UrlBuilder {
 	}
 
 	public UrlBuilder addParam(String key, String value) {
-		params.put(key, value);
+		try {
+			params.put(key, URLEncoder.encode(value, "UTF-8"));
+		} catch (UnsupportedEncodingException e) {
+			params.put(key, value);
+		}
 		return this;
 	}
 
 	public UrlBuilder addParam(String key, int value) {
-		params.put(key, String.valueOf(value));
-		return this;
+		return addParam(key, String.valueOf(value));
 	}
 
 	public String build() {

@@ -1,10 +1,14 @@
 package ru.tpu.rasp.api;
 
+import android.util.Log;
+
 import java.io.IOException;
 
 import ru.tpu.rasp.app.Utils;
+import ru.tpu.rasp.data.Schedule;
 import ru.tpu.rasp.exceptions.ParseException;
 import ru.tpu.rasp.parsers.Parser;
+import ru.tpu.rasp.parsers.ScheduleParser;
 import ru.tpu.rasp.parsers.SearchParser;
 
 /**
@@ -21,6 +25,18 @@ public class TpuGrabberClient implements TpuClient {
 				.addParam("term", part)
 				.build();
 		Parser<String[]> parser = new SearchParser();
+		return parser.parse(Utils.readStringFromUrl(url));
+	}
+
+	@Override
+	public Schedule scheduleFor(String token) throws IOException, ParseException {
+		String url = new UrlBuilder()
+				.setUrl(TPU_GRABBER_URL)
+				.setMethod("schedule")
+				.addParam("for", token)
+				.build();
+		Log.d("aaa", url);
+		Parser<Schedule> parser = new ScheduleParser();
 		return parser.parse(Utils.readStringFromUrl(url));
 	}
 }

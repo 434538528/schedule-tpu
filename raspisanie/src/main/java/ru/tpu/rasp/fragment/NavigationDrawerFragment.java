@@ -1,4 +1,4 @@
-package ru.tpu.rasp.fragments;
+package ru.tpu.rasp.fragment;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
@@ -20,7 +20,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import ru.tpu.rasp.R;
 

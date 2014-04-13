@@ -1,4 +1,4 @@
-package ru.tpu.rasp.activities;
+package ru.tpu.rasp.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,10 +14,10 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import ru.tpu.rasp.R;
-import ru.tpu.rasp.adapters.SearchAdapter;
+import ru.tpu.rasp.adapter.SearchAdapter;
 import ru.tpu.rasp.app.App;
-import ru.tpu.rasp.loaders.SearchLoader;
-import ru.tpu.rasp.providers.Result;
+import ru.tpu.rasp.loader.SearchLoader;
+import ru.tpu.rasp.provider.Result;
 
 /**
  * Активити для поиска и выбора расписания

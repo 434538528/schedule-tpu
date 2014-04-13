@@ -1,10 +1,10 @@
-package ru.tpu.rasp.parsers;
+package ru.tpu.rasp.parser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import ru.tpu.rasp.exceptions.ParseException;
-import ru.tpu.rasp.exceptions.TpuGrabberException;
+import ru.tpu.rasp.exception.ParseException;
+import ru.tpu.rasp.exception.TpuGrabberException;
 
 /**
  * Парсер ответов от граббера данных с ТПУ. Проверяет, успешно ли сервер обработал данные

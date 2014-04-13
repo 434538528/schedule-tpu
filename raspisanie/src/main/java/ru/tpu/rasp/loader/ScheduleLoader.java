@@ -1,10 +1,10 @@
-package ru.tpu.rasp.loaders;
+package ru.tpu.rasp.loader;
 
 import android.content.Context;
 
 import ru.tpu.rasp.app.App;
 import ru.tpu.rasp.data.Schedule;
-import ru.tpu.rasp.providers.Result;
+import ru.tpu.rasp.provider.Result;
 
 /**
  * Created by Andrey on 13.04.2014.

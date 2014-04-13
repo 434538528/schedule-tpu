@@ -4,8 +4,8 @@ import android.app.Application;
 
 import ru.tpu.rasp.api.TpuClient;
 import ru.tpu.rasp.api.TpuGrabberClient;
-import ru.tpu.rasp.providers.ScheduleProvider;
-import ru.tpu.rasp.providers.SearchProvider;
+import ru.tpu.rasp.provider.ScheduleProvider;
+import ru.tpu.rasp.provider.SearchProvider;
 
 public class App extends Application {
 	private SearchProvider searchProvider;

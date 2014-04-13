@@ -1,4 +1,4 @@
-package ru.tpu.rasp.exceptions;
+package ru.tpu.rasp.exception;
 
 /**
  * Возвращается, когда сервер не смог обработать данные (success = false)

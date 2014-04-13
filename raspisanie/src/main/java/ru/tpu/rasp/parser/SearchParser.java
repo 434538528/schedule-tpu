@@ -1,4 +1,4 @@
-package ru.tpu.rasp.parsers;
+package ru.tpu.rasp.parser;
 
 import org.json.JSONArray;
 import org.json.JSONException;

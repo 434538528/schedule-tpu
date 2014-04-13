@@ -6,10 +6,10 @@ import java.io.IOException;
 
 import ru.tpu.rasp.app.Utils;
 import ru.tpu.rasp.data.Schedule;
-import ru.tpu.rasp.exceptions.ParseException;
-import ru.tpu.rasp.parsers.Parser;
-import ru.tpu.rasp.parsers.ScheduleParser;
-import ru.tpu.rasp.parsers.SearchParser;
+import ru.tpu.rasp.exception.ParseException;
+import ru.tpu.rasp.parser.Parser;
+import ru.tpu.rasp.parser.ScheduleParser;
+import ru.tpu.rasp.parser.SearchParser;
 
 /**
  * Created by Andrey on 16.03.14.

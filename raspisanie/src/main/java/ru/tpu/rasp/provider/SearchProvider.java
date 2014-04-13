@@ -1,4 +1,4 @@
-package ru.tpu.rasp.providers;
+package ru.tpu.rasp.provider;
 
 import ru.tpu.rasp.api.TpuClient;
 

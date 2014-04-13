@@ -1,4 +1,4 @@
-package ru.tpu.rasp.adapters;
+package ru.tpu.rasp.adapter;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
@@ -7,10 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import java.util.List;
-
 import ru.tpu.rasp.R;
-import ru.tpu.rasp.data.Lesson;
 import ru.tpu.rasp.data.WeekSchedule;
 
 /**

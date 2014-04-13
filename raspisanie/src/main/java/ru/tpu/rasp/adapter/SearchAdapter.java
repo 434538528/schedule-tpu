@@ -1,4 +1,4 @@
-package ru.tpu.rasp.adapters;
+package ru.tpu.rasp.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

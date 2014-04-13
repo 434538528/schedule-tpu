@@ -1,4 +1,4 @@
-package ru.tpu.rasp.fragments;
+package ru.tpu.rasp.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -14,28 +14,31 @@ import android.view.ViewGroup;
 import com.astuetz.PagerSlidingTabStrip;
 
 import ru.tpu.rasp.R;
-import ru.tpu.rasp.adapters.LessonsPagerAdapter;
+import ru.tpu.rasp.adapter.LessonsPagerAdapter;
 import ru.tpu.rasp.data.Schedule;
-import ru.tpu.rasp.loaders.ScheduleLoader;
-import ru.tpu.rasp.providers.Result;
+import ru.tpu.rasp.loader.ScheduleLoader;
+import ru.tpu.rasp.provider.Result;
+import ru.tpu.rasp.view.LoadingView;
 
 /**
- * Created by Andrey on 16.03.14.
+ * Фрагмент для отображения расписания на неделю
  */
-public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCallbacks<Result<Schedule>> {
-	public static ScheduleFragment newInstance(String token, boolean isBroken, boolean isEven, int dayOfWeek) {
-		ScheduleFragment scheduleFragment = new ScheduleFragment();
+public class WeekScheduleFragment extends Fragment implements LoaderManager.LoaderCallbacks<Result<Schedule>> {
+	private static final String TAG = WeekScheduleFragment.class.getSimpleName();
+
+	public static WeekScheduleFragment newInstance(String token, boolean isBroken, boolean isEven, int dayOfWeek) {
+		WeekScheduleFragment weekScheduleFragment = new WeekScheduleFragment();
 		Bundle bundle = new Bundle();
 		bundle.putString("token", token);
 		bundle.putBoolean("isBroken", isBroken);
 		bundle.putBoolean("isEven", isEven);
 		bundle.putInt("dayOfWeek", dayOfWeek);
-		scheduleFragment.setArguments(bundle);
-		return scheduleFragment;
+		weekScheduleFragment.setArguments(bundle);
+		return weekScheduleFragment;
 	}
 
 	private Context mContext;
-	private View mThrobber;
+	private LoadingView mLoadingView;
 	private String mToken;
 	private LessonsPagerAdapter mLessonsPagerAdapter;
 
@@ -54,28 +57,30 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
 
 		PagerSlidingTabStrip weeksTabs = (PagerSlidingTabStrip) v.findViewById(R.id.weeks_tabs);
 		ViewPager viewPager = (ViewPager) v.findViewById(R.id.lessons_pager);
-		mThrobber = v.findViewById(R.id.throbber);
+		mLoadingView = (LoadingView) v.findViewById(R.id.loading_view);
 
 		mLessonsPagerAdapter = new LessonsPagerAdapter(mContext);
 		viewPager.setAdapter(mLessonsPagerAdapter);
 		weeksTabs.setViewPager(viewPager);
 
-		mThrobber.setVisibility(View.INVISIBLE);
 		getLoaderManager().initLoader(0, null, this);
 		return v;
 	}
 
 	@Override
 	public Loader<Result<Schedule>> onCreateLoader(int id, Bundle args) {
+		mLoadingView.showLoading();
 		return new ScheduleLoader(mContext, mToken);
 	}
 
 	@Override
 	public void onLoadFinished(Loader<Result<Schedule>> loader, Result<Schedule> data) {
 		try {
+			mLoadingView.showLoaded();
 			mLessonsPagerAdapter.setSchedule(data.get().getWeek(Schedule.EVEN_AFTER_BREAKING));
 		} catch (Exception e) {
-			Log.e("aaa", "beda", e);
+			Log.e(TAG, "не удалось загрузить расписание:", e);
+			mLoadingView.showDefaultFail();
 		}
 	}
 

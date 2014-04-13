@@ -1,4 +1,4 @@
-package ru.tpu.rasp.adapters;
+package ru.tpu.rasp.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,7 +10,6 @@ import android.widget.TextView;
 import java.util.List;
 
 import ru.tpu.rasp.R;
-import ru.tpu.rasp.data.GroupLesson;
 import ru.tpu.rasp.data.Lesson;
 
 /**

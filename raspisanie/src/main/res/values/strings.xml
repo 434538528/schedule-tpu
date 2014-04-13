@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-	<string name="app_name">Расписание</string>
+	<string name="app_name">Расписание ТПУ</string>
 	<string name="activity_search">Поиск расписания</string>
 	<string name="title_section1">Section 1</string>
 	<string name="title_section2">Section 2</string>
@@ -13,6 +13,10 @@
 
 	<string name="action_search">Поиск</string>
 	<string name="search_hint">Поиск расписания</string>
+
+	<string name="btn_retry">Повторить</string>
+
+	<string name="error_default">Не удалось загрузить данные</string>
 
 	<string-array name="daysOfWeek">
 		<item>ПН</item>

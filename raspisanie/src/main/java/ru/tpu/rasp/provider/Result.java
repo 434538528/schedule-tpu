@@ -1,4 +1,4 @@
-package ru.tpu.rasp.providers;
+package ru.tpu.rasp.provider;
 
 /**
  * Обёртка над данными вместе с ошибкой.

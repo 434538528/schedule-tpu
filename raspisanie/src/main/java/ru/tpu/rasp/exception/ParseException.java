@@ -1,4 +1,4 @@
-package ru.tpu.rasp.exceptions;
+package ru.tpu.rasp.exception;
 
 import org.json.JSONException;
 

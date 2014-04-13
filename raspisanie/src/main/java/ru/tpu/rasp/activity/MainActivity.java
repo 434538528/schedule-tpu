@@ -1,4 +1,4 @@
-package ru.tpu.rasp.activities;
+package ru.tpu.rasp.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,8 +12,8 @@ import android.view.MenuItem;
 
 import ru.tpu.rasp.R;
 import ru.tpu.rasp.app.App;
-import ru.tpu.rasp.fragments.NavigationDrawerFragment;
-import ru.tpu.rasp.fragments.ScheduleFragment;
+import ru.tpu.rasp.fragment.NavigationDrawerFragment;
+import ru.tpu.rasp.fragment.WeekScheduleFragment;
 
 
 public class MainActivity extends ActionBarActivity
@@ -55,7 +55,7 @@ public class MainActivity extends ActionBarActivity
 		// update the main content by replacing fragments
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		fragmentManager.beginTransaction()
-				.replace(R.id.container, ScheduleFragment.newInstance(mScheduleToken, false, false, 0))
+				.replace(R.id.container, WeekScheduleFragment.newInstance(mScheduleToken, false, false, 0))
 				.commit();
 	}
 

@@ -54,6 +54,8 @@ public class LessonsAdapter extends BaseAdapter {
 		holder.startTime.setText(lesson.startTime);
 		holder.title.setText(lesson.subject);
 		holder.type.setText(lesson.type);
+		holder.subtitle1.setText(lesson.getFirstSubtitle());
+		holder.subtitle2.setText(lesson.getSecondSubtitle());
 		return convertView;
 	}
 

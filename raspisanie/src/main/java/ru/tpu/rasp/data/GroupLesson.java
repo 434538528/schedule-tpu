@@ -13,4 +13,14 @@ public class GroupLesson extends Lesson {
 		this.teacher = teacher;
 		this.room = room;
 	}
+
+	@Override
+	public String getFirstSubtitle() {
+		return teacher;
+	}
+
+	@Override
+	public String getSecondSubtitle() {
+		return room;
+	}
 }

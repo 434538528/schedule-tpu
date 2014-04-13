@@ -3,7 +3,7 @@ package ru.tpu.rasp.data;
 /**
  * Created by Andrey on 16.03.14.
  */
-public class Lesson {
+public abstract class Lesson {
 	public final String startTime;
 	public final String subject;
 	public final String type;
@@ -13,4 +13,7 @@ public class Lesson {
 		this.subject = subject;
 		this.type = type;
 	}
+
+	public abstract String getFirstSubtitle();
+	public abstract String getSecondSubtitle();
 }

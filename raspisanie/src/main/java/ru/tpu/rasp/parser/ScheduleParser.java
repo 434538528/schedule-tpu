@@ -9,7 +9,9 @@ import java.util.List;
 
 import ru.tpu.rasp.data.GroupLesson;
 import ru.tpu.rasp.data.Lesson;
+import ru.tpu.rasp.data.RoomLesson;
 import ru.tpu.rasp.data.Schedule;
+import ru.tpu.rasp.data.TeacherLesson;
 import ru.tpu.rasp.data.WeekSchedule;
 
 /**
@@ -52,6 +54,16 @@ public class ScheduleParser extends TpuGrabberParser<Schedule> {
 					lessons.add(parseGroupLesson(dayArray.getJSONObject(i)));
 				}
 				break;
+			case 1:
+				for (int i = 0; i < dayArray.length(); i++) {
+					lessons.add(parseTeacherLesson(dayArray.getJSONObject(i)));
+				}
+				break;
+			case 2:
+				for (int i = 0; i < dayArray.length(); i++) {
+					lessons.add(parseRoomLesson(dayArray.getJSONObject(i)));
+				}
+				break;
 		}
 		return lessons;
 	}
@@ -63,5 +75,23 @@ public class ScheduleParser extends TpuGrabberParser<Schedule> {
 				lessonJSON.getString("type"),
 				lessonJSON.getString("teacher"),
 				lessonJSON.getString("room"));
+	}
+
+	private TeacherLesson parseTeacherLesson(JSONObject lessonJSON) throws JSONException {
+		return new TeacherLesson(
+				lessonJSON.getString("time"),
+				lessonJSON.getString("title"),
+				lessonJSON.getString("type"),
+				lessonJSON.getString("room"),
+				lessonJSON.getString("groups"));
+	}
+
+	private RoomLesson parseRoomLesson(JSONObject lessonJSON) throws JSONException {
+		return new RoomLesson(
+				lessonJSON.getString("time"),
+				lessonJSON.getString("title"),
+				lessonJSON.getString("type"),
+				lessonJSON.getString("teacher"),
+				lessonJSON.getString("groups"));
 	}
 }

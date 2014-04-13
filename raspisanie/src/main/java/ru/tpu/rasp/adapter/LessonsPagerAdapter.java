@@ -39,9 +39,6 @@ public class LessonsPagerAdapter extends PagerAdapter {
 
 		listView.setEmptyView(emptyView);
 		listView.setAdapter(lessonsAdapter);
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH){
-			listView.setOverScrollMode(View.OVER_SCROLL_NEVER);
-		}
 		if (mWeekSchedule != null){
 			lessonsAdapter.setLessons(mWeekSchedule.getDayLessons(position));
 		}

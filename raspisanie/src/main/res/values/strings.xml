@@ -18,6 +18,8 @@
 
 	<string name="error_default">Не удалось загрузить данные</string>
 
+	<string name="empty_day">Нет занятий на выбранный день</string>
+
 	<string-array name="daysOfWeek">
 		<item>ПН</item>
 		<item>ВТ</item>

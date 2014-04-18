@@ -56,16 +56,18 @@ public class MainActivity extends BaseNavigationActivity {
 			}
 		};
 		getDrawerLayout().setDrawerListener(mDrawerToggle);
-		FragmentManager fragmentManager = getSupportFragmentManager();
-		fragmentManager.beginTransaction()
-				.replace(R.id.container, WeekScheduleFragment.newInstance(getConfig().getScheduleToken(), isEven(), isBeforeBreak(), 0))
-				.commit();
 		selectItem(getConfig().isEven() ? EVEN : ODD);
 		selectItem(getConfig().isBeforeBreak() ? BEFORE_BREAK : AFTER_BREAK);
-		if (getIntent().getBooleanExtra(EXTRA_OPEN_DRAWER, false)){
-			openDrawer();
-		} else {
-			setTitle(getConfig().getScheduleToken());
+		if (savedInstanceState == null) {
+			FragmentManager fragmentManager = getSupportFragmentManager();
+			fragmentManager.beginTransaction()
+					.add(R.id.container, WeekScheduleFragment.newInstance(getConfig().getScheduleToken(), isEven(), isBeforeBreak(), 0))
+					.commit();
+			if (getIntent().getBooleanExtra(EXTRA_OPEN_DRAWER, false)) {
+				openDrawer();
+			} else {
+				setTitle(getConfig().getScheduleToken());
+			}
 		}
 	}
 

@@ -3,15 +3,20 @@
 
 	<string name="app_name">Расписание ТПУ</string>
 	<string name="activity_search">Поиск расписания</string>
+
 	<string name="title_section1">Section 1</string>
 	<string name="title_section2">Section 2</string>
 	<string name="title_section3">Section 3</string>
 	<string name="navigation_drawer_open">Open navigation drawer</string>
 	<string name="navigation_drawer_close">Close navigation drawer</string>
-	<string name="action_refresh">Обновить</string>
 
+	<string name="nav_even_week">Четная</string>
+	<string name="nav_odd_week">Нечетная</string>
+	<string name="nav_before_break_week">До ломки</string>
+	<string name="nav_after_break_week">После ломки</string>
+
+	<string name="action_refresh">Обновить</string>
 	<string name="action_search">Поиск</string>
-	<string name="search_hint">Поиск расписания</string>
 
 	<string name="btn_retry">Повторить</string>
 
@@ -19,7 +24,7 @@
 
 	<string name="empty_day">Нет занятий на выбранный день</string>
 
-	<string-array name="daysOfWeek">
+	<string-array name="days_of_week">
 		<item>ПН</item>
 		<item>ВТ</item>
 		<item>СР</item>

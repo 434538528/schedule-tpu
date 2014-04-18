@@ -16,6 +16,7 @@ import com.astuetz.PagerSlidingTabStrip;
 import ru.tpu.rasp.R;
 import ru.tpu.rasp.adapter.LessonsPagerAdapter;
 import ru.tpu.rasp.data.Schedule;
+import ru.tpu.rasp.data.WeekSchedule;
 import ru.tpu.rasp.loader.ScheduleLoader;
 import ru.tpu.rasp.provider.Result;
 import ru.tpu.rasp.view.LoadingView;
@@ -26,12 +27,12 @@ import ru.tpu.rasp.view.LoadingView;
 public class WeekScheduleFragment extends Fragment implements LoaderManager.LoaderCallbacks<Result<Schedule>> {
 	private static final String TAG = WeekScheduleFragment.class.getSimpleName();
 
-	public static WeekScheduleFragment newInstance(String token, boolean isBroken, boolean isEven, int dayOfWeek) {
+	public static WeekScheduleFragment newInstance(String token, boolean isEven, boolean isBeforeBreak, int dayOfWeek) {
 		WeekScheduleFragment weekScheduleFragment = new WeekScheduleFragment();
 		Bundle bundle = new Bundle();
 		bundle.putString("token", token);
-		bundle.putBoolean("isBroken", isBroken);
 		bundle.putBoolean("isEven", isEven);
+		bundle.putBoolean("isBeforeBreak", isBeforeBreak);
 		bundle.putInt("dayOfWeek", dayOfWeek);
 		weekScheduleFragment.setArguments(bundle);
 		return weekScheduleFragment;
@@ -41,17 +42,23 @@ public class WeekScheduleFragment extends Fragment implements LoaderManager.Load
 	private LoadingView mLoadingView;
 	private String mToken;
 	private LessonsPagerAdapter mLessonsPagerAdapter;
+	private boolean mIsBeforeBreak;
+	private boolean mIsEven;
+	private int mDayOfWeek;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setRetainInstance(true);
+		mIsBeforeBreak = getArguments().getBoolean("isBeforeBreak");
+		mIsEven = getArguments().getBoolean("isEven");
+		mToken = getArguments().getString("token");
+		mDayOfWeek = getArguments().getInt("dayOfWeek");
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		mContext = inflater.getContext();
-		mToken = getArguments().getString("token");
 		View v = inflater.inflate(R.layout.fragment_schedule, container, false);
 		assert v != null;
 
@@ -62,7 +69,7 @@ public class WeekScheduleFragment extends Fragment implements LoaderManager.Load
 		mLoadingView.setOnRetryListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				reload();
+				reload(mIsEven, mIsBeforeBreak);
 			}
 		});
 
@@ -84,7 +91,19 @@ public class WeekScheduleFragment extends Fragment implements LoaderManager.Load
 	public void onLoadFinished(Loader<Result<Schedule>> loader, Result<Schedule> data) {
 		try {
 			mLoadingView.showLoaded();
-			mLessonsPagerAdapter.setSchedule(data.get().getWeek(Schedule.EVEN_AFTER_BREAKING));
+			WeekSchedule weekSchedule;
+			if (mIsEven){
+				if (mIsBeforeBreak)
+					weekSchedule = data.get().getWeek(Schedule.EVEN_BEFORE_BREAKING);
+				else
+					weekSchedule = data.get().getWeek(Schedule.EVEN_AFTER_BREAKING);
+			} else {
+				if (mIsBeforeBreak)
+					weekSchedule = data.get().getWeek(Schedule.ODD_BEFORE_BREAKING);
+				else
+					weekSchedule = data.get().getWeek(Schedule.ODD_AFTER_BREAKING);
+			}
+			mLessonsPagerAdapter.setSchedule(weekSchedule);
 		} catch (Exception e) {
 			Log.e(TAG, "не удалось загрузить расписание:", e);
 			mLoadingView.showDefaultFail();
@@ -95,7 +114,9 @@ public class WeekScheduleFragment extends Fragment implements LoaderManager.Load
 	public void onLoaderReset(Loader<Result<Schedule>> loader) {
 	}
 
-	public void reload() {
+	public void reload(boolean isEven, boolean isBeforeBreak) {
+		mIsEven = isEven;
+		mIsBeforeBreak = isBeforeBreak;
 		getLoaderManager().restartLoader(0, null, this);
 	}
 }

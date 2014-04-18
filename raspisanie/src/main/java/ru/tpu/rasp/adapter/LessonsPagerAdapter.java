@@ -27,7 +27,7 @@ public class LessonsPagerAdapter extends PagerAdapter {
 	public LessonsPagerAdapter(Context context) {
 		mContext = context;
 		mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		mDaysOfWeek = context.getResources().getStringArray(R.array.daysOfWeek);
+		mDaysOfWeek = context.getResources().getStringArray(R.array.days_of_week);
 	}
 
 	@Override

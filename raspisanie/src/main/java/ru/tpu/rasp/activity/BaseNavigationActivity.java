@@ -92,6 +92,8 @@ public abstract class BaseNavigationActivity extends ActionBarActivity {
 
 			}
 		});
+
+
 	}
 
 	private class OnNavItemClickListener implements View.OnClickListener {

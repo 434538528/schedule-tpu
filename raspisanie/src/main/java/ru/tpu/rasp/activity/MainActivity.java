@@ -16,8 +16,11 @@ import ru.tpu.rasp.fragment.WeekScheduleFragment;
 
 public class MainActivity extends BaseNavigationActivity {
 
-	public static Intent newIntent(Context context) {
+	private static final String EXTRA_OPEN_DRAWER = "openDrawer";
+
+	public static Intent newIntent(Context context, boolean openDrawer) {
 		Intent intent = new Intent(context, MainActivity.class);
+		intent.putExtra(EXTRA_OPEN_DRAWER, openDrawer);
 		return intent;
 	}
 
@@ -53,17 +56,24 @@ public class MainActivity extends BaseNavigationActivity {
 			}
 		};
 		getDrawerLayout().setDrawerListener(mDrawerToggle);
-		selectItem(getConfig().isEven() ? EVEN : ODD);
-		selectItem(getConfig().isBeforeBreak() ? BEFORE_BREAK : AFTER_BREAK);
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		fragmentManager.beginTransaction()
 				.replace(R.id.container, WeekScheduleFragment.newInstance(getConfig().getScheduleToken(), isEven(), isBeforeBreak(), 0))
 				.commit();
+		selectItem(getConfig().isEven() ? EVEN : ODD);
+		selectItem(getConfig().isBeforeBreak() ? BEFORE_BREAK : AFTER_BREAK);
+		if (getIntent().getBooleanExtra(EXTRA_OPEN_DRAWER, false)){
+			openDrawer();
+		} else {
+			setTitle(getConfig().getScheduleToken());
+		}
 	}
 
 	@Override
 	public void navigateTo(int index) {
 		selectItem(index);
+		getConfig().setEven(isEven());
+		getConfig().setBeforeBreak(isBeforeBreak());
 		getWeekScheduleFragment().reload(isEven(), isBeforeBreak());
 	}
 

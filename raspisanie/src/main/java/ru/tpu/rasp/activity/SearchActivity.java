@@ -47,7 +47,7 @@ public class SearchActivity extends ActionBarActivity implements LoaderManager.L
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				mApp.getConfig().setScheduleToken(mAdapter.getItem(position));
-				Intent intent = MainActivity.newIntent(SearchActivity.this);
+				Intent intent = MainActivity.newIntent(SearchActivity.this, true);
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(intent);
 			}

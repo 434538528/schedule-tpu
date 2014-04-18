@@ -53,11 +53,11 @@ public class MainActivity extends BaseNavigationActivity {
 			}
 		};
 		getDrawerLayout().setDrawerListener(mDrawerToggle);
-		selectItem(ODD);
-		selectItem(BEFORE_BREAK);
+		selectItem(getConfig().isEven() ? EVEN : ODD);
+		selectItem(getConfig().isBeforeBreak() ? BEFORE_BREAK : AFTER_BREAK);
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		fragmentManager.beginTransaction()
-				.replace(R.id.container, WeekScheduleFragment.newInstance(getConfig().getScheduleToken(), isBeforeBreak(), false, 0))
+				.replace(R.id.container, WeekScheduleFragment.newInstance(getConfig().getScheduleToken(), isEven(), isBeforeBreak(), 0))
 				.commit();
 	}
 
@@ -66,6 +66,7 @@ public class MainActivity extends BaseNavigationActivity {
 		selectItem(index);
 		getWeekScheduleFragment().reload(isEven(), isBeforeBreak());
 	}
+
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);

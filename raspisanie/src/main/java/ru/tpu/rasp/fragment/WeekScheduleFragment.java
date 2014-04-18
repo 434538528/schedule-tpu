@@ -90,6 +90,7 @@ public class WeekScheduleFragment extends Fragment implements LoaderManager.Load
 	@Override
 	public void onLoadFinished(Loader<Result<Schedule>> loader, Result<Schedule> data) {
 		try {
+			Log.d("aaa", mIsEven +" "+ mIsBeforeBreak);
 			mLoadingView.showLoaded();
 			WeekSchedule weekSchedule;
 			if (mIsEven){

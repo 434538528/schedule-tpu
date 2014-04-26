@@ -1,9 +1,11 @@
 package ru.tpu.rasp.data;
 
+import java.io.Serializable;
+
 /**
  * Created by Andrey on 16.03.14.
  */
-public class RoomLesson extends Lesson {
+public class RoomLesson extends Lesson implements Serializable {
 
 	public final String teacher;
 	public final String groups;

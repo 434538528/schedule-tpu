@@ -7,8 +7,8 @@
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
-            <option value="D:\Projects\Java Android\raspisanie" />
-            <option value="D:\Projects\Java Android\raspisanie\raspisanie" />
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/raspisanie" />
           </set>
         </option>
       </GradleProjectSettings>

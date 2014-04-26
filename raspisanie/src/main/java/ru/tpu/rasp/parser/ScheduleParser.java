@@ -46,22 +46,22 @@ public class ScheduleParser extends TpuGrabberParser<Schedule> {
 				.build();
 	}
 
-	private List<Lesson> parseLessons(JSONArray dayArray, int type) throws JSONException {
-		List<Lesson> lessons = new ArrayList<Lesson>(dayArray.length());
+	private Lesson[] parseLessons(JSONArray dayArray, int type) throws JSONException {
+		Lesson[] lessons = new Lesson[dayArray.length()];
 		switch (type) {
 			case 0:
 				for (int i = 0; i < dayArray.length(); i++) {
-					lessons.add(parseGroupLesson(dayArray.getJSONObject(i)));
+					lessons[i] = parseGroupLesson(dayArray.getJSONObject(i));
 				}
 				break;
 			case 1:
 				for (int i = 0; i < dayArray.length(); i++) {
-					lessons.add(parseTeacherLesson(dayArray.getJSONObject(i)));
+					lessons[i] = parseTeacherLesson(dayArray.getJSONObject(i));
 				}
 				break;
 			case 2:
 				for (int i = 0; i < dayArray.length(); i++) {
-					lessons.add(parseRoomLesson(dayArray.getJSONObject(i)));
+					lessons[i] = parseRoomLesson(dayArray.getJSONObject(i));
 				}
 				break;
 		}

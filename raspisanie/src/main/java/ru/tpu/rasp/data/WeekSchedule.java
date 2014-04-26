@@ -2,13 +2,14 @@ package ru.tpu.rasp.data;
 
 import android.util.SparseArray;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 
 /**
  * Расписание на неделю
  */
-public class WeekSchedule {
+public class WeekSchedule implements Serializable {
 
 	public static final int MONDAY = 0;
 	public static final int TUESDAY = 1;
@@ -17,67 +18,67 @@ public class WeekSchedule {
 	public static final int FRIDAY = 4;
 	public static final int SATURDAY = 5;
 
-	private final SparseArray<List<Lesson>> lessons;
+	private final Lesson[][] lessons;
 
-	public List<Lesson> getDayLessons(int day) {
-		return lessons.get(day);
+	public Lesson[] getDayLessons(int day) {
+		return lessons[day];
 	}
 
-	private WeekSchedule(SparseArray<List<Lesson>> lessons) {
+	private WeekSchedule(Lesson[][] lessons) {
 		this.lessons = lessons;
 	}
 
 	public static class Builder {
-		private SparseArray<List<Lesson>> lessons = new SparseArray<List<Lesson>>(6);
+		private Lesson[][] lessons = new Lesson[6][];
 
-		public Builder setMondayLessons(List<Lesson> lessons) {
-			this.lessons.put(MONDAY, lessons);
+		public Builder setMondayLessons(Lesson[] lessons) {
+			this.lessons[MONDAY] = lessons;
 			return this;
 		}
 
-		public Builder setTuesdayLessons(List<Lesson> lessons) {
-			this.lessons.put(TUESDAY, lessons);
+		public Builder setTuesdayLessons(Lesson[] lessons) {
+			this.lessons[TUESDAY] = lessons;
 			return this;
 		}
 
-		public Builder setWednesdayLessons(List<Lesson> lessons) {
-			this.lessons.put(WEDNESDAY, lessons);
+		public Builder setWednesdayLessons(Lesson[] lessons) {
+			this.lessons[WEDNESDAY] = lessons;
 			return this;
 		}
 
-		public Builder setThursdayLessons(List<Lesson> lessons) {
-			this.lessons.put(THURSDAY, lessons);
+		public Builder setThursdayLessons(Lesson[] lessons) {
+			this.lessons[THURSDAY] = lessons;
 			return this;
 		}
 
-		public Builder setFridayLessons(List<Lesson> lessons) {
-			this.lessons.put(FRIDAY, lessons);
+		public Builder setFridayLessons(Lesson[] lessons) {
+			this.lessons[FRIDAY] = lessons;
 			return this;
 		}
 
-		public Builder setSaturdayLessons(List<Lesson> lessons) {
-			this.lessons.put(SATURDAY, lessons);
+		public Builder setSaturdayLessons(Lesson[] lessons) {
+			this.lessons[SATURDAY] = lessons;
 			return this;
 		}
 
 		public WeekSchedule build() {
-			if (lessons.indexOfKey(MONDAY) < 0) {
-				lessons.put(MONDAY, Collections.<Lesson>emptyList());
+			if (lessons[MONDAY] == null) {
+				lessons[MONDAY] = new Lesson[0];
 			}
-			if (lessons.indexOfKey(TUESDAY) < 0) {
-				lessons.put(MONDAY, Collections.<Lesson>emptyList());
+			if (lessons[TUESDAY] == null) {
+				lessons[TUESDAY] = new Lesson[0];
 			}
-			if (lessons.indexOfKey(WEDNESDAY) < 0) {
-				lessons.put(MONDAY, Collections.<Lesson>emptyList());
+			if (lessons[WEDNESDAY] == null) {
+				lessons[WEDNESDAY] = new Lesson[0];
 			}
-			if (lessons.indexOfKey(THURSDAY) < 0) {
-				lessons.put(MONDAY, Collections.<Lesson>emptyList());
+			if (lessons[THURSDAY] == null) {
+				lessons[THURSDAY] = new Lesson[0];
 			}
-			if (lessons.indexOfKey(FRIDAY) < 0) {
-				lessons.put(MONDAY, Collections.<Lesson>emptyList());
+			if (lessons[FRIDAY] == null) {
+				lessons[FRIDAY] = new Lesson[0];
 			}
-			if (lessons.indexOfKey(SATURDAY) < 0) {
-				lessons.put(MONDAY, Collections.<Lesson>emptyList());
+			if (lessons[SATURDAY] == null) {
+				lessons[SATURDAY] = new Lesson[0];
 			}
 			return new WeekSchedule(lessons);
 		}

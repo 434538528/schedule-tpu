@@ -17,7 +17,7 @@ import ru.tpu.rasp.data.Lesson;
  */
 public class LessonsAdapter extends BaseAdapter {
 
-	private List<Lesson> mLessons;
+	private Lesson[] mLessons;
 	private LayoutInflater mInflater;
 
 	public LessonsAdapter(Context context) {
@@ -26,12 +26,12 @@ public class LessonsAdapter extends BaseAdapter {
 
 	@Override
 	public int getCount() {
-		return mLessons == null ? 0 : mLessons.size();
+		return mLessons == null ? 0 : mLessons.length;
 	}
 
 	@Override
 	public Lesson getItem(int position) {
-		return mLessons.get(position);
+		return mLessons[position];
 	}
 
 	@Override
@@ -50,7 +50,7 @@ public class LessonsAdapter extends BaseAdapter {
 			holder = (ViewHolder) convertView.getTag();
 		}
 
-		Lesson lesson = mLessons.get(position);
+		Lesson lesson = mLessons[position];
 		holder.startTime.setText(lesson.startTime);
 		holder.title.setText(lesson.subject);
 		holder.type.setText(lesson.type);
@@ -59,7 +59,7 @@ public class LessonsAdapter extends BaseAdapter {
 		return convertView;
 	}
 
-	public void setLessons(List<Lesson> lessons){
+	public void setLessons(Lesson[] lessons){
 		mLessons = lessons;
 		notifyDataSetChanged();
 	}

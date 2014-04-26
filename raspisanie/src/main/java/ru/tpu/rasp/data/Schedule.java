@@ -2,20 +2,22 @@ package ru.tpu.rasp.data;
 
 import android.util.SparseArray;
 
+import java.io.Serializable;
+
 /**
  * Полное расписание
  */
-public class Schedule {
+public class Schedule implements Serializable {
 
 	public static final int EVEN_BEFORE_BREAKING = 0;
 	public static final int ODD_BEFORE_BREAKING = 1;
 	public static final int EVEN_AFTER_BREAKING = 2;
 	public static final int ODD_AFTER_BREAKING = 3;
 
-	private SparseArray<WeekSchedule> weeks;
+	private WeekSchedule[] weeks;
 	private final int type;
 
-	private Schedule(int type, SparseArray<WeekSchedule> weeks) {
+	private Schedule(int type, WeekSchedule[] weeks) {
 		this.type = type;
 		this.weeks = weeks;
 	}
@@ -25,11 +27,11 @@ public class Schedule {
 	}
 
 	public WeekSchedule getWeek(int weekType) {
-		return weeks.get(weekType);
+		return weeks[weekType];
 	}
 
 	public static class Builder {
-		private final SparseArray<WeekSchedule> weeks = new SparseArray<WeekSchedule>(4);
+		private final WeekSchedule[] weeks = new WeekSchedule[4];
 		private final int type;
 
 		public Builder(int type) {
@@ -37,37 +39,37 @@ public class Schedule {
 		}
 
 		public Builder setEvenWeekBeforeBreaking(WeekSchedule weekSchedule) {
-			weeks.put(EVEN_BEFORE_BREAKING, weekSchedule);
+			weeks[EVEN_BEFORE_BREAKING] = weekSchedule;
 			return this;
 		}
 
 		public Builder setOddWeekBeforeBreaking(WeekSchedule weekSchedule) {
-			weeks.put(ODD_BEFORE_BREAKING, weekSchedule);
+			weeks[ODD_BEFORE_BREAKING] = weekSchedule;
 			return this;
 		}
 
 		public Builder setEvenWeekAfterBreaking(WeekSchedule weekSchedule) {
-			weeks.put(EVEN_AFTER_BREAKING, weekSchedule);
+			weeks[EVEN_AFTER_BREAKING] = weekSchedule;
 			return this;
 		}
 
 		public Builder setOddWeekAfterBreaking(WeekSchedule weekSchedule) {
-			weeks.put(ODD_AFTER_BREAKING, weekSchedule);
+			weeks[ODD_AFTER_BREAKING] = weekSchedule;
 			return this;
 		}
 
 		public Schedule build() {
-			if (weeks.indexOfKey(EVEN_BEFORE_BREAKING) < 0) {
-				weeks.put(EVEN_BEFORE_BREAKING, new WeekSchedule.Builder().build());
+			if (weeks[EVEN_BEFORE_BREAKING] == null){
+				weeks[EVEN_BEFORE_BREAKING] = new WeekSchedule.Builder().build();
 			}
-			if (weeks.indexOfKey(ODD_BEFORE_BREAKING) < 0) {
-				weeks.put(ODD_BEFORE_BREAKING, new WeekSchedule.Builder().build());
+			if (weeks[ODD_BEFORE_BREAKING] == null){
+				weeks[ODD_BEFORE_BREAKING] = new WeekSchedule.Builder().build();
 			}
-			if (weeks.indexOfKey(EVEN_AFTER_BREAKING) < 0) {
-				weeks.put(EVEN_AFTER_BREAKING, new WeekSchedule.Builder().build());
+			if (weeks[EVEN_AFTER_BREAKING] == null){
+				weeks[EVEN_AFTER_BREAKING] = new WeekSchedule.Builder().build();
 			}
-			if (weeks.indexOfKey(ODD_AFTER_BREAKING) < 0) {
-				weeks.put(ODD_AFTER_BREAKING, new WeekSchedule.Builder().build());
+			if (weeks[ODD_AFTER_BREAKING] == null){
+				weeks[ODD_AFTER_BREAKING] = new WeekSchedule.Builder().build();
 			}
 			return new Schedule(type, weeks);
 		}

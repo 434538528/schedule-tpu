@@ -19,7 +19,7 @@ import ru.tpu.rasp.data.WeekSchedule;
  */
 public class ScheduleParser extends TpuGrabberParser<Schedule> {
 	@Override
-	public Schedule parseResult(JSONObject resultJSON) throws JSONException {
+	Schedule parseResult(JSONObject resultJSON) throws JSONException {
 		resultJSON = resultJSON.getJSONObject("schedule");
 		int type = resultJSON.getInt("type");
 

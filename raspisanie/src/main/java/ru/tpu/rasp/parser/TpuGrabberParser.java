@@ -24,5 +24,5 @@ public abstract class TpuGrabberParser<T> implements Parser<T> {
 		}
 	}
 
-	public abstract T parseResult(JSONObject resultJSON) throws JSONException;
+	abstract T parseResult(JSONObject resultJSON) throws JSONException;
 }

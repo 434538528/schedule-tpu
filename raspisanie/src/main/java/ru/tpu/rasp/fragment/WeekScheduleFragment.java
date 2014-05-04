@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +17,8 @@ import ru.tpu.rasp.adapter.LessonsPagerAdapter;
 import ru.tpu.rasp.data.Schedule;
 import ru.tpu.rasp.data.WeekSchedule;
 import ru.tpu.rasp.loader.ScheduleLoader;
-import ru.tpu.rasp.provider.OkResult;
 import ru.tpu.rasp.provider.Result;
+import ru.tpu.rasp.view.DefaultLoadingView;
 import ru.tpu.rasp.view.LoadingView;
 
 /**
@@ -65,7 +64,7 @@ public class WeekScheduleFragment extends Fragment implements LoaderManager.Load
 
 		PagerSlidingTabStrip weeksTabs = (PagerSlidingTabStrip) v.findViewById(R.id.weeks_tabs);
 		ViewPager viewPager = (ViewPager) v.findViewById(R.id.lessons_pager);
-		mLoadingView = (LoadingView) v.findViewById(R.id.loading_view);
+		mLoadingView = (DefaultLoadingView) v.findViewById(R.id.loading_view);
 
 		mLoadingView.setOnRetryListener(new View.OnClickListener() {
 			@Override

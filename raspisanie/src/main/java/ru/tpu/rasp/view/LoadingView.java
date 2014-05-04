@@ -1,83 +1,20 @@
 package ru.tpu.rasp.view;
 
-import android.app.Service;
-import android.content.Context;
-import android.graphics.Color;
-import android.util.AttributeSet;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import ru.tpu.rasp.R;
 
 /**
- * View для отображения статуса загрузки данных
+ * @author andrey.pogrebnoy
  */
-public class LoadingView extends RelativeLayout {
-	private ProgressBar loadingView;
-	private View errorView;
-	private TextView errorText;
-	private TextView retryButton;
+public interface LoadingView {
+	void showLoading();
 
-	public LoadingView(Context context) {
-		super(context);
-		init();
-	}
+	public void showDefaultFail();
 
-	public LoadingView(Context context, AttributeSet attrs) {
-		super(context, attrs);
-		init();
-	}
+	public void showFailed(int messageId);
 
-	public LoadingView(Context context, AttributeSet attrs, int defStyle) {
-		super(context, attrs, defStyle);
-		init();
-	}
+	public void showLoaded();
 
-	private void init() {
-		loadingView = new ProgressBar(getContext());
-		LayoutParams layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-		layoutParams.addRule(CENTER_IN_PARENT, TRUE);
-		loadingView.setLayoutParams(layoutParams);
-		loadingView.setVisibility(View.INVISIBLE);
-		addView(loadingView);
-
-		LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Service.LAYOUT_INFLATER_SERVICE);
-		errorView = inflater.inflate(R.layout.view_loading_error, this, false);
-		retryButton = (TextView) errorView.findViewById(R.id.loading_retry_button);
-		errorText = (TextView) errorView.findViewById(R.id.loading_error_text);
-		errorView.setVisibility(View.INVISIBLE);
-		addView(errorView);
-		setClickable(true);
-
-		setBackgroundColor(Color.WHITE);
-	}
-
-	public void showLoading(){
-		setVisibility(View.VISIBLE);
-		errorView.setVisibility(View.INVISIBLE);
-		loadingView.setVisibility(View.VISIBLE);
-	}
-
-	public void showDefaultFail(){
-		showFailed(R.string.error_default);
-	}
-
-	public void showFailed(int messageId){
-		setVisibility(View.VISIBLE);
-		errorText.setText(messageId);
-		errorView.setVisibility(View.VISIBLE);
-		loadingView.setVisibility(View.INVISIBLE);
-	}
-
-	public void showLoaded(){
-		setVisibility(View.GONE);
-	}
-
-	public void setOnRetryListener(OnClickListener onClickListener) {
-		retryButton.setOnClickListener(onClickListener);
-	}
+	public void setOnRetryListener(View.OnClickListener onClickListener);
 }

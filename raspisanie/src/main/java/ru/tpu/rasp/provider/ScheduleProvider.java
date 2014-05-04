@@ -19,29 +19,21 @@ public class ScheduleProvider {
 		this.memCache = memCache;
 	}
 
-	/**
-	 * throws IOException, ParseException, TpuGrabberException
-	 */
-	public Result<Schedule> getSchedule(final String token) {
-		return new Result<Schedule>(new Result.Processor<Schedule>() {
-			@Override
-			public Schedule process() throws Exception {
-				Schedule schedule = memCache.get(token);
-				if (schedule != null) {
-					return schedule;
-				}
-				schedule = diskCache.get(token);
-				if (schedule != null) {
-					memCache.put(schedule, token);
-					return schedule;
-				}
-				schedule = tpuClient.scheduleFor(token);
-				if (schedule != null) {
-					diskCache.put(schedule, token);
-					memCache.put(schedule, token);
-				}
-				return schedule;
-			}
-		});
+	public Schedule getSchedule(final String token) throws Exception {
+		Schedule schedule = memCache.get(token);
+		if (schedule != null) {
+			return schedule;
+		}
+		schedule = diskCache.get(token);
+		if (schedule != null) {
+			memCache.put(schedule, token);
+			return schedule;
+		}
+		schedule = tpuClient.scheduleFor(token);
+		if (schedule != null) {
+			diskCache.put(schedule, token);
+			memCache.put(schedule, token);
+		}
+		return schedule;
 	}
 }

@@ -9,15 +9,7 @@ public class SearchProvider {
 		this.tpuClient = tpuClient;
 	}
 
-	/**
-	 * throws IOException, ParseException, TpuGrabberException
-	 */
-	public Result<String[]> getKeys(final String part) {
-		return new Result<String[]>(new Result.Processor<String[]>() {
-			@Override
-			public String[] process() throws Exception {
-				return tpuClient.search(part);
-			}
-		});
+	public String[] getKeys(final String part) throws Exception{
+		return tpuClient.search(part);
 	}
 }

@@ -3,9 +3,8 @@ package ru.tpu.rasp.loader;
 import android.content.Context;
 
 import ru.tpu.rasp.app.App;
-import ru.tpu.rasp.provider.Result;
 
-public class SearchLoader extends BackgroundLoader<String[]> {
+public class SearchLoader extends ResultLoader<String[]> {
 	private String mToken;
 
 	public SearchLoader(Context context, String token) {
@@ -14,7 +13,7 @@ public class SearchLoader extends BackgroundLoader<String[]> {
 	}
 
 	@Override
-	public Result<String[]> loadInBackground() {
+	String[] loadSafe() throws Exception {
 		return ((App) getContext().getApplicationContext()).getSearchProvider().getKeys(mToken);
 	}
 }

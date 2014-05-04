@@ -4,12 +4,11 @@ import android.content.Context;
 
 import ru.tpu.rasp.app.App;
 import ru.tpu.rasp.data.Schedule;
-import ru.tpu.rasp.provider.Result;
 
 /**
  * Created by Andrey on 13.04.2014.
  */
-public class ScheduleLoader extends BackgroundLoader<Schedule> {
+public class ScheduleLoader extends ResultLoader<Schedule> {
 	private String mToken;
 
 	public ScheduleLoader(Context context, String token) {
@@ -18,7 +17,7 @@ public class ScheduleLoader extends BackgroundLoader<Schedule> {
 	}
 
 	@Override
-	public Result<Schedule> loadInBackground() {
+	Schedule loadSafe() throws Exception {
 		return ((App) getContext().getApplicationContext()).getScheduleProvider().getSchedule(mToken);
 	}
 }

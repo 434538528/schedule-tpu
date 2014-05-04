@@ -10,8 +10,8 @@ public class ResultTest extends TestCase {
 	private String okString = "everything is ok!";
 
 	public void testResult() {
-		Result<String> failResult = new Result<String>(new MockProcessor(true));
-		Result<String> okResult = new Result<String>(new MockProcessor(false));
+		Result<String> failResult = new FailResult<String>(new Exception());
+		Result<String> okResult = new OkResult<String>(okString);
 
 		try {
 			assertEquals(okString, okResult.get());
@@ -20,22 +20,5 @@ public class ResultTest extends TestCase {
 		} catch (Exception e) {
 		}
 
-	}
-
-	private class MockProcessor implements Result.Processor<String> {
-
-		private final boolean wouldFail;
-
-		public MockProcessor(boolean wouldFail) {
-			this.wouldFail = wouldFail;
-		}
-
-		@Override
-		public String process() throws Exception {
-			if (wouldFail) {
-				throw new Exception("mock exception");
-			}
-			return okString;
-		}
 	}
 }

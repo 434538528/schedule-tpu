@@ -18,6 +18,7 @@ import ru.tpu.rasp.adapter.LessonsPagerAdapter;
 import ru.tpu.rasp.data.Schedule;
 import ru.tpu.rasp.data.WeekSchedule;
 import ru.tpu.rasp.loader.ScheduleLoader;
+import ru.tpu.rasp.provider.OkResult;
 import ru.tpu.rasp.provider.Result;
 import ru.tpu.rasp.view.LoadingView;
 
@@ -105,7 +106,6 @@ public class WeekScheduleFragment extends Fragment implements LoaderManager.Load
 			}
 			mLessonsPagerAdapter.setSchedule(weekSchedule);
 		} catch (Exception e) {
-			Log.e(TAG, "не удалось загрузить расписание:", e);
 			mLoadingView.showDefaultFail();
 		}
 	}

@@ -8,6 +8,7 @@ import android.support.v4.content.Loader;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -17,6 +18,7 @@ import ru.tpu.rasp.R;
 import ru.tpu.rasp.adapter.SearchAdapter;
 import ru.tpu.rasp.app.App;
 import ru.tpu.rasp.loader.SearchLoader;
+import ru.tpu.rasp.provider.OkResult;
 import ru.tpu.rasp.provider.Result;
 
 /**
@@ -77,8 +79,7 @@ public class SearchActivity extends ActionBarActivity implements LoaderManager.L
 	public void onLoadFinished(Loader<Result<String[]>> loader, Result<String[]> data) {
 		try {
 			mAdapter.setTokens(data.get());
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (Exception ignored) {
 		}
 	}
 

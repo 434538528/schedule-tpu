@@ -12,7 +12,7 @@ import ru.tpu.rasp.parser.ScheduleParser;
 import ru.tpu.rasp.parser.SearchParser;
 
 /**
- * Created by Andrey on 16.03.14.
+ * @author andrey.pogrebnoy
  */
 public class TpuGrabberClient implements TpuClient {
 	private static final String TPU_GRABBER_URL = "http://78.140.13.90:8080/TpuGrabber/";

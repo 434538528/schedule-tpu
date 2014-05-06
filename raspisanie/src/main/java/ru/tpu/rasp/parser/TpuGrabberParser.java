@@ -8,6 +8,8 @@ import ru.tpu.rasp.exception.TpuGrabberException;
 
 /**
  * Парсер ответов от граббера данных с ТПУ. Проверяет, успешно ли сервер обработал данные
+ * 
+ * @author andrey.pogrebnoy
  */
 public abstract class TpuGrabberParser<T> implements Parser<T> {
 	@Override

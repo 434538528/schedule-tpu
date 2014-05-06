@@ -21,19 +21,22 @@ import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+/**
+ * @author andrey.pogrebnoy
+ */
 public class Utils {
 
-	public static HttpParams httpParameters;
+	public static final HttpParams HTTP_PARAMS;
 	private static final String TAG = Utils.class.getSimpleName();
 
 	static {
-		httpParameters = new BasicHttpParams();
-		HttpConnectionParams.setConnectionTimeout(httpParameters, 5000);
-		HttpConnectionParams.setSoTimeout(httpParameters, 5000);
+		HTTP_PARAMS = new BasicHttpParams();
+		HttpConnectionParams.setConnectionTimeout(HTTP_PARAMS, 5000);
+		HttpConnectionParams.setSoTimeout(HTTP_PARAMS, 5000);
 	}
 
 	public static String readStringFromUrl(String url) throws IOException {
-		HttpClient client = new DefaultHttpClient(httpParameters);
+		HttpClient client = new DefaultHttpClient(HTTP_PARAMS);
 		HttpGet request = new HttpGet(url);
 		InputStream is = null;
 

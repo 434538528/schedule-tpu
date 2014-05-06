@@ -1,7 +1,5 @@
 package ru.tpu.rasp.api;
 
-import android.util.Log;
-
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
@@ -9,31 +7,33 @@ import java.util.Map;
 
 /**
  * Билдер URL строки для запросов с параметрами
+ *
+ * @author andrey.pogrebnoy
  */
 public class UrlBuilder {
-	private String url;
-	private String method;
-	private final Map<String, String> params = new HashMap<String, String>();
+	private String mUrl;
+	private String mMethod;
+	private final Map<String, String> mParams = new HashMap<String, String>();
 
 	public UrlBuilder setUrl(String url) {
 		if (!url.endsWith("/")) {
-			this.url = url + "/";
+			this.mUrl = url + "/";
 		} else {
-			this.url = url;
+			this.mUrl = url;
 		}
 		return this;
 	}
 
 	public UrlBuilder setMethod(String method) {
-		this.method = method;
+		this.mMethod = method;
 		return this;
 	}
 
 	public UrlBuilder addParam(String key, String value) {
 		try {
-			params.put(key, URLEncoder.encode(value, "UTF-8"));
+			mParams.put(key, URLEncoder.encode(value, "UTF-8"));
 		} catch (UnsupportedEncodingException e) {
-			params.put(key, value);
+			mParams.put(key, value);
 		}
 		return this;
 	}
@@ -43,8 +43,8 @@ public class UrlBuilder {
 	}
 
 	public String build() {
-		String result = url + method + "?";
-		for (Map.Entry<String, String> entry : params.entrySet()) {
+		String result = mUrl + mMethod + "?";
+		for (Map.Entry<String, String> entry : mParams.entrySet()) {
 			result += entry.getKey() + "=" + entry.getValue() + "&";
 		}
 		return result;

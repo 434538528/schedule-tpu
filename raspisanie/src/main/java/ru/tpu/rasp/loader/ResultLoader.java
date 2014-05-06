@@ -9,7 +9,7 @@ import ru.tpu.rasp.provider.OkResult;
 import ru.tpu.rasp.provider.Result;
 
 /**
- * Created by Andrey on 06.04.2014.
+ * @author andrey.pogrebnoy
  */
 public abstract class ResultLoader<D> extends AsyncTaskLoader<Result<D>> {
 	public ResultLoader(Context context) {

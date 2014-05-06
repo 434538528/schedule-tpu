@@ -3,7 +3,7 @@ package ru.tpu.rasp.data;
 import java.io.Serializable;
 
 /**
- * Created by Andrey on 16.03.14.
+ * @author andrey.pogrebnoy
  */
 public class RoomLesson extends Lesson implements Serializable {
 

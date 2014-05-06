@@ -10,7 +10,7 @@ import android.widget.TextView;
 import ru.tpu.rasp.R;
 
 /**
- * Created by Andrey on 06.04.2014.
+ * @author andrey.pogrebnoy
  */
 public class SearchAdapter extends BaseAdapter {
 	private String[] mTokens;

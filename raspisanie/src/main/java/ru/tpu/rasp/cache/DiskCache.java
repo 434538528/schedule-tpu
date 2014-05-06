@@ -33,13 +33,13 @@ public class DiskCache<T, J> implements Cache<T, J> {
 		}
 		try {
 			ParamData data = (ParamData) object;
-			if (!data.param.equals(param)) {
+			if (!data.mParam.equals(param)) {
 				if (mDeleteOnWrongParam) {
 					mFile.delete();
 				}
 				return null;
 			}
-			return (T) data.data;
+			return (T) data.mParam;
 		} catch (ClassCastException e) {
 			Log.e(TAG, "unable to cast file: ", e);
 		}

@@ -6,7 +6,7 @@ import java.lang.ref.SoftReference;
  * @author andrey.pogrebnoy
  */
 public class MemCache<T, J> implements Cache<T, J> {
-	private SoftReference<ParamData<T, J>> dataRef;
+	private SoftReference<ParamData<T, J>> mDataRef;
 	private final boolean mDeleteOnWrongParam;
 
 	public MemCache(boolean deleteOnWrongParam) {
@@ -15,24 +15,24 @@ public class MemCache<T, J> implements Cache<T, J> {
 
 	@Override
 	public void put(T data, J param) {
-		this.dataRef = new SoftReference<ParamData<T, J>>(new ParamData<T, J>(data, param));
+		this.mDataRef = new SoftReference<ParamData<T, J>>(new ParamData<T, J>(data, param));
 	}
 
 	@Override
 	public T get(J param) {
-		if (dataRef == null) {
+		if (mDataRef == null) {
 			return null;
 		}
-		ParamData<T, J> data = dataRef.get();
+		ParamData<T, J> data = mDataRef.get();
 		if (data == null) {
 			return null;
 		}
-		if (!data.param.equals(param)) {
+		if (!data.mParam.equals(param)) {
 			if (mDeleteOnWrongParam) {
-				dataRef = null;
+				mDataRef = null;
 			}
 			return null;
 		}
-		return data.data;
+		return data.mData;
 	}
 }

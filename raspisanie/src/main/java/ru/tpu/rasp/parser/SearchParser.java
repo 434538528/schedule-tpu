@@ -6,6 +6,8 @@ import org.json.JSONObject;
 
 /**
  * Парсер для метода search
+ *
+ * @author andrey.pogrebnoy
  */
 public class SearchParser extends TpuGrabberParser<String[]> {
 	@Override

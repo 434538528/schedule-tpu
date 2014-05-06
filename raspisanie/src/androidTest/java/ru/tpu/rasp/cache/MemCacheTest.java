@@ -27,9 +27,9 @@ public class MemCacheTest extends TestCase {
 
 	public void testSoftCache(){
 		assertNull(softMemCache.get("aaa"));
-		softMemCache.put("data", "param1");
-		assertEquals("data", softMemCache.get("param1"));
+		softMemCache.put("mData", "param1");
+		assertEquals("mData", softMemCache.get("param1"));
 		assertNull(softMemCache.get("param2"));
-		assertEquals("data", softMemCache.get("param1"));
+		assertEquals("mData", softMemCache.get("param1"));
 	}
 }

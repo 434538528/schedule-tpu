@@ -16,6 +16,8 @@ import ru.tpu.rasp.data.WeekSchedule;
 
 /**
  * Парсинг расписания
+ *
+ * @author andrey.pogrebnoy
  */
 public class ScheduleParser extends TpuGrabberParser<Schedule> {
 	@Override

@@ -14,6 +14,8 @@ import ru.tpu.rasp.data.Lesson;
 
 /**
  * Адаптер для списка занятий
+ *
+ * @author andrey.pogrebnoy
  */
 public class LessonsAdapter extends BaseAdapter {
 

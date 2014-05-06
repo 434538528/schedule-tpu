@@ -6,11 +6,11 @@ import java.io.Serializable;
  * @author andrey.pogrebnoy
  */
 public class ParamData<T, J> implements Serializable {
-	T data;
-	J param;
+	T mData;
+	J mParam;
 
 	ParamData(T data, J param) {
-		this.data = data;
-		this.param = param;
+		mData = data;
+		mParam = param;
 	}
 }

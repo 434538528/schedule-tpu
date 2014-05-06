@@ -14,6 +14,8 @@ import ru.tpu.rasp.app.Config;
 
 /**
  * Активити с slide-menu. При добавлении основного лэйаута нужно использовать setDrawerView вместо setContentView
+ *
+ * @author andrey.pogrebnoy
  */
 public abstract class BaseNavigationActivity extends ActionBarActivity {
 

@@ -6,7 +6,7 @@ import ru.tpu.rasp.app.App;
 import ru.tpu.rasp.data.Schedule;
 
 /**
- * Created by Andrey on 13.04.2014.
+ * @author andrey.pogrebnoy
  */
 public class ScheduleLoader extends ResultLoader<Schedule> {
 	private String mToken;

@@ -1,13 +1,11 @@
 package ru.tpu.rasp.data;
 
-import android.util.SparseArray;
-
 import java.io.Serializable;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Расписание на неделю
+ *
+ * @author andrey.pogrebnoy
  */
 public class WeekSchedule implements Serializable {
 
@@ -18,14 +16,14 @@ public class WeekSchedule implements Serializable {
 	public static final int FRIDAY = 4;
 	public static final int SATURDAY = 5;
 
-	private final Lesson[][] lessons;
+	private final Lesson[][] mLessons;
 
 	public Lesson[] getDayLessons(int day) {
-		return lessons[day];
+		return mLessons[day];
 	}
 
 	private WeekSchedule(Lesson[][] lessons) {
-		this.lessons = lessons;
+		mLessons = lessons;
 	}
 
 	public static class Builder {

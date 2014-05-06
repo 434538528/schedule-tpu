@@ -4,6 +4,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+/**
+ * @author andrey.pogrebnoy
+ */
 public class SPConfig implements Config {
 	private static final String SP_SCHEDULE_TOKEN = "schedule_token";
 	private static final String SP_EVEN = "even";

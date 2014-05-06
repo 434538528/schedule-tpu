@@ -1,11 +1,11 @@
 package ru.tpu.rasp.data;
 
-import android.util.SparseArray;
-
 import java.io.Serializable;
 
 /**
  * Полное расписание
+ *
+ * @author andrey.pogrebnoy
  */
 public class Schedule implements Serializable {
 
@@ -14,20 +14,20 @@ public class Schedule implements Serializable {
 	public static final int EVEN_AFTER_BREAKING = 2;
 	public static final int ODD_AFTER_BREAKING = 3;
 
-	private WeekSchedule[] weeks;
-	private final int type;
+	private WeekSchedule[] mWeeks;
+	private final int mType;
 
 	private Schedule(int type, WeekSchedule[] weeks) {
-		this.type = type;
-		this.weeks = weeks;
+		mType = type;
+		mWeeks = weeks;
 	}
 
 	public int getType() {
-		return type;
+		return mType;
 	}
 
 	public WeekSchedule getWeek(int weekType) {
-		return weeks[weekType];
+		return mWeeks[weekType];
 	}
 
 	public static class Builder {

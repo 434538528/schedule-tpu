@@ -6,33 +6,33 @@ import ru.tpu.rasp.cache.MemCache;
 import ru.tpu.rasp.data.Schedule;
 
 /**
- * Created by Andrey on 06.04.2014.
+ * @author andrey.pogrebnoy
  */
 public class ScheduleProvider {
-	private final TpuClient tpuClient;
-	private final DiskCache<Schedule, String> diskCache;
-	private final MemCache<Schedule, String> memCache;
+	private final TpuClient mTpuClient;
+	private final DiskCache<Schedule, String> mDiskCache;
+	private final MemCache<Schedule, String> mMemCache;
 
 	public ScheduleProvider(TpuClient tpuClient, DiskCache<Schedule, String> diskCache, MemCache<Schedule, String> memCache) {
-		this.tpuClient = tpuClient;
-		this.diskCache = diskCache;
-		this.memCache = memCache;
+		this.mTpuClient = tpuClient;
+		this.mDiskCache = diskCache;
+		this.mMemCache = memCache;
 	}
 
 	public Schedule getSchedule(final String token) throws Exception {
-		Schedule schedule = memCache.get(token);
+		Schedule schedule = mMemCache.get(token);
 		if (schedule != null) {
 			return schedule;
 		}
-		schedule = diskCache.get(token);
+		schedule = mDiskCache.get(token);
 		if (schedule != null) {
-			memCache.put(schedule, token);
+			mMemCache.put(schedule, token);
 			return schedule;
 		}
-		schedule = tpuClient.scheduleFor(token);
+		schedule = mTpuClient.scheduleFor(token);
 		if (schedule != null) {
-			diskCache.put(schedule, token);
-			memCache.put(schedule, token);
+			mDiskCache.put(schedule, token);
+			mMemCache.put(schedule, token);
 		}
 		return schedule;
 	}

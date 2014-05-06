@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -15,12 +14,14 @@ import ru.tpu.rasp.R;
 
 /**
  * View для отображения статуса загрузки данных
+ *
+ * @author andrey.pogrebnoy
  */
 public class DefaultLoadingView extends RelativeLayout implements LoadingView {
-	private ProgressBar loadingView;
-	private View errorView;
-	private TextView errorText;
-	private TextView retryButton;
+	private ProgressBar mProgressBarView;
+	private View mErrorView;
+	private TextView mErrorText;
+	private TextView mRetryButton;
 
 	public DefaultLoadingView(Context context) {
 		super(context);
@@ -38,19 +39,19 @@ public class DefaultLoadingView extends RelativeLayout implements LoadingView {
 	}
 
 	private void init() {
-		loadingView = new ProgressBar(getContext());
+		mProgressBarView = new ProgressBar(getContext());
 		LayoutParams layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		layoutParams.addRule(CENTER_IN_PARENT, TRUE);
-		loadingView.setLayoutParams(layoutParams);
-		loadingView.setVisibility(View.INVISIBLE);
-		addView(loadingView);
+		mProgressBarView.setLayoutParams(layoutParams);
+		mProgressBarView.setVisibility(View.INVISIBLE);
+		addView(mProgressBarView);
 
 		LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Service.LAYOUT_INFLATER_SERVICE);
-		errorView = inflater.inflate(R.layout.view_loading_error, this, false);
-		retryButton = (TextView) errorView.findViewById(R.id.loading_retry_button);
-		errorText = (TextView) errorView.findViewById(R.id.loading_error_text);
-		errorView.setVisibility(View.INVISIBLE);
-		addView(errorView);
+		mErrorView = inflater.inflate(R.layout.view_loading_error, this, false);
+		mRetryButton = (TextView) mErrorView.findViewById(R.id.loading_retry_button);
+		mErrorText = (TextView) mErrorView.findViewById(R.id.loading_error_text);
+		mErrorView.setVisibility(View.INVISIBLE);
+		addView(mErrorView);
 		setClickable(true);
 
 		setBackgroundColor(Color.WHITE);
@@ -59,8 +60,8 @@ public class DefaultLoadingView extends RelativeLayout implements LoadingView {
 	@Override
 	public void showLoading(){
 		setVisibility(View.VISIBLE);
-		errorView.setVisibility(View.INVISIBLE);
-		loadingView.setVisibility(View.VISIBLE);
+		mErrorView.setVisibility(View.INVISIBLE);
+		mProgressBarView.setVisibility(View.VISIBLE);
 	}
 
 	@Override
@@ -71,9 +72,9 @@ public class DefaultLoadingView extends RelativeLayout implements LoadingView {
 	@Override
 	public void showFailed(int messageId){
 		setVisibility(View.VISIBLE);
-		errorText.setText(messageId);
-		errorView.setVisibility(View.VISIBLE);
-		loadingView.setVisibility(View.INVISIBLE);
+		mErrorText.setText(messageId);
+		mErrorView.setVisibility(View.VISIBLE);
+		mProgressBarView.setVisibility(View.INVISIBLE);
 	}
 
 	@Override
@@ -83,6 +84,6 @@ public class DefaultLoadingView extends RelativeLayout implements LoadingView {
 
 	@Override
 	public void setOnRetryListener(OnClickListener onClickListener) {
-		retryButton.setOnClickListener(onClickListener);
+		mRetryButton.setOnClickListener(onClickListener);
 	}
 }

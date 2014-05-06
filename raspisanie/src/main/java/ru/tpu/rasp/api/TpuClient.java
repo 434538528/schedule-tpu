@@ -6,7 +6,7 @@ import ru.tpu.rasp.data.Schedule;
 import ru.tpu.rasp.exception.ParseException;
 
 /**
- * Created by Andrey on 16.03.14.
+ * @author andrey.pogrebnoy
  */
 public interface TpuClient {
 	String[] search(String part) throws IOException, ParseException;

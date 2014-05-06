@@ -1,5 +1,8 @@
 package ru.tpu.rasp.app;
 
+/**
+ * @author andrey.pogrebnoy
+ */
 public interface Config {
 	String getScheduleToken();
 	void setScheduleToken(String scheduleToken);

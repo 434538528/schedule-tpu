@@ -1,19 +1,19 @@
 package ru.tpu.rasp.provider;
 
 /**
- * Обёртка над данными вместе с ошибкой.
+ * @author andrey.pogrebnoy
  */
 public class OkResult<T> implements Result<T> {
 
-	private T data;
+	private T mData;
 
 	public OkResult(T data) {
-		this.data = data;
+		this.mData = data;
 	}
 
 	@Override
 	public T get() {
-		return data;
+		return mData;
 	}
 
 }

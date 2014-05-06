@@ -23,9 +23,10 @@ import ru.tpu.rasp.view.LoadingView;
 
 /**
  * Фрагмент для отображения расписания на неделю
+ *
+ * @author andrey.pogrebnoy
  */
 public class WeekScheduleFragment extends Fragment implements LoaderManager.LoaderCallbacks<Result<Schedule>> {
-	private static final String TAG = WeekScheduleFragment.class.getSimpleName();
 
 	public static WeekScheduleFragment newInstance(String token, boolean isEven, boolean isBeforeBreak, int dayOfWeek) {
 		WeekScheduleFragment weekScheduleFragment = new WeekScheduleFragment();

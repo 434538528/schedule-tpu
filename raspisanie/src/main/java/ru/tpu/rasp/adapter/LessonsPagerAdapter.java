@@ -13,7 +13,7 @@ import ru.tpu.rasp.R;
 import ru.tpu.rasp.data.WeekSchedule;
 
 /**
- * Created by Andrey on 16.03.14.
+ * @author andrey.pogrebnoy
  */
 public class LessonsPagerAdapter extends PagerAdapter {
 

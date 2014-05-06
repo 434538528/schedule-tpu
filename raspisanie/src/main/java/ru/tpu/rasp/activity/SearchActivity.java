@@ -23,6 +23,8 @@ import ru.tpu.rasp.provider.Result;
 
 /**
  * Активити для поиска и выбора расписания
+ *
+ * @author andrey.pogrebnoy
  */
 public class SearchActivity extends ActionBarActivity implements LoaderManager.LoaderCallbacks<Result<String[]>> {
 	public static Intent newIntent(Context context) {

@@ -14,6 +14,7 @@ import ru.tpu.rasp.R;
 import ru.tpu.rasp.fragment.WeekScheduleFragment;
 
 /**
+ *
  * @author andrey.pogrebnoy
  */
 public class MainActivity extends BaseNavigationActivity {

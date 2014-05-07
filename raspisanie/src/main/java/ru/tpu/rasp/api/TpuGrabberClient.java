@@ -35,7 +35,6 @@ public class TpuGrabberClient implements TpuClient {
 				.setMethod("schedule")
 				.addParam("for", token)
 				.build();
-		Log.d("aaa", url);
 		Parser<Schedule> parser = new ScheduleParser();
 		return parser.parse(Utils.readStringFromUrl(url));
 	}

@@ -78,7 +78,7 @@ public class WeekScheduleFragment extends Fragment implements LoaderManager.Load
 		viewPager.setAdapter(mLessonsPagerAdapter);
 		weeksTabs.setViewPager(viewPager);
 
-		getLoaderManager().initLoader(0, null, this);
+		getLoaderManager().initLoader(0, null, this).forceLoad();
 		return v;
 	}
 
@@ -117,6 +117,6 @@ public class WeekScheduleFragment extends Fragment implements LoaderManager.Load
 	public void reload(boolean isEven, boolean isBeforeBreak) {
 		mIsEven = isEven;
 		mIsBeforeBreak = isBeforeBreak;
-		getLoaderManager().restartLoader(0, null, this);
+		getLoaderManager().restartLoader(0, null, this).forceLoad();
 	}
 }

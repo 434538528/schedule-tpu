@@ -63,7 +63,7 @@ public class SearchActivity extends ActionBarActivity implements LoaderManager.L
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				getSupportLoaderManager().restartLoader(0, null, SearchActivity.this);
+				getSupportLoaderManager().restartLoader(0, null, SearchActivity.this).forceLoad();
 			}
 
 			@Override

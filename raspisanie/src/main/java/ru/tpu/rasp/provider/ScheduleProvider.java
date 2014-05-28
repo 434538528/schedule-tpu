@@ -19,15 +19,18 @@ public class ScheduleProvider {
 		this.mMemCache = memCache;
 	}
 
-	public Schedule getSchedule(final String token) throws Exception {
-		Schedule schedule = mMemCache.get(token);
-		if (schedule != null) {
-			return schedule;
-		}
-		schedule = mDiskCache.get(token);
-		if (schedule != null) {
-			mMemCache.put(schedule, token);
-			return schedule;
+	public Schedule getSchedule(final String token, boolean ignoreCache) throws Exception {
+		Schedule schedule;
+		if (!ignoreCache) {
+			schedule = mMemCache.get(token);
+			if (schedule != null) {
+				return schedule;
+			}
+			schedule = mDiskCache.get(token);
+			if (schedule != null) {
+				mMemCache.put(schedule, token);
+				return schedule;
+			}
 		}
 		schedule = mTpuClient.scheduleFor(token);
 		if (schedule != null) {

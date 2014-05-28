@@ -10,14 +10,15 @@ import ru.tpu.rasp.data.Schedule;
  */
 public class ScheduleLoader extends ResultLoader<Schedule> {
 	private String mToken;
+	private boolean mIgnoreCache;
 
-	public ScheduleLoader(Context context, String token) {
+	public ScheduleLoader(Context context, String token, boolean ignoreCache) {
 		super(context);
 		mToken = token;
 	}
 
 	@Override
 	Schedule loadSafe() throws Exception {
-		return ((App) getContext().getApplicationContext()).getScheduleProvider().getSchedule(mToken);
+		return ((App) getContext().getApplicationContext()).getScheduleProvider().getSchedule(mToken, mIgnoreCache);
 	}
 }

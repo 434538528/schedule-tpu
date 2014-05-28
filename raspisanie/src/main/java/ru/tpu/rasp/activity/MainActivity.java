@@ -79,7 +79,7 @@ public class MainActivity extends BaseNavigationActivity {
 		selectItem(index);
 		getConfig().setEven(isEven());
 		getConfig().setBeforeBreak(isBeforeBreak());
-		getWeekScheduleFragment().reload(isEven(), isBeforeBreak());
+		getWeekScheduleFragment().reload(isEven(), isBeforeBreak(), false);
 	}
 
 	@Override
@@ -114,7 +114,7 @@ public class MainActivity extends BaseNavigationActivity {
 			return true;
 		}
 		if (id == R.id.action_refresh) {
-			getWeekScheduleFragment().reload(isEven(), isBeforeBreak());
+			getWeekScheduleFragment().reload(isEven(), isBeforeBreak(), true);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

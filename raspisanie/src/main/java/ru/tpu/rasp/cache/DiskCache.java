@@ -39,7 +39,7 @@ public class DiskCache<T, J> implements Cache<T, J> {
 				}
 				return null;
 			}
-			return (T) data.mParam;
+			return (T) data.mData;
 		} catch (ClassCastException e) {
 			Log.e(TAG, "unable to cast file: ", e);
 		}
